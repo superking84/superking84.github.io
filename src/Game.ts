@@ -1,90 +1,115 @@
-type LetterDictionary = {
-    [index: string]: number[];
-};
-type LetterGuessDictionary = {
-    [index: string]: {
-        letterGuessState: LetterGuessState;
-    };
-};
-export enum LetterGuessState {
-    NotInWord = 0,
-    InWrongPosition,
-    InCorrectPosition
-};
+import LetterDictionary from "./types/LetterDictionary";
+import LetterGuessDictionary from "./types/LetterGuessDictionary";
+import LetterGuessState from "./types/LetterGuessState";
 
 class Game {
-    word: string;
+    private static MAX_TURNS: number = 6;
+    // global (in the game sense) fields
+    private round: number; // number of times the game has been played
 
-    letterPlacements: LetterDictionary;
-    lettersUsed: LetterGuessDictionary;
-    wordsGuessed: string[];
-
-    readonly maxTurns: number = 5;
+    // round-specific fields
     private currentTurn: number;
+    private numberTurns: number;
 
+    private _word!: string;
+    public get word(): string {
+        return this._word;
+    }
 
-    constructor(word: string) {
-        this.word = word.toUpperCase();
+    private letterPlacements: LetterDictionary;
+    private letterGuesses: LetterGuessDictionary;
+    private wordsGuessed: string[];
+
+    constructor() {
+        this.round = 1;
 
         this.letterPlacements = {};
-        this.word.split('').forEach((letter, i) => {
-            if (this.letterPlacements[letter] === undefined) {
-                this.letterPlacements[letter] = [];
-            }
-
-            this.letterPlacements[letter].push(i);
-        });
-
-        this.lettersUsed = {};
-        this.wordsGuessed = [];
-
         this.currentTurn = 1;
+        this.numberTurns = Game.MAX_TURNS;
+        this.letterGuesses = {};
+        this.wordsGuessed = [];
     }
 
-    isGameOver(): boolean {
-        return this.currentTurn > this.maxTurns;
+    public startNew(): void {
+        this.round += 1;
+
+        this.letterPlacements = {};
+        this.currentTurn = 1;
+        this.numberTurns = Game.MAX_TURNS;
+        this.wordsGuessed = [];
+        this.letterGuesses = {};
+
+        this._word = "BINGO";
+        this.initLetterPlacements();
     }
 
-    isGuessCorrect(guess: string): boolean {
-        return guess === this.word;
-    }
+    public processGuess(guess: string): void {
+        this.currentTurn += 1;
+        this.wordsGuessed.push(guess);
 
-    isLetterInWord(letter: string): boolean {
-        return this.word.indexOf(letter) >= 0;
-    }
-
-    isLetterInCorrectPosition(guess: string, letter: string): boolean {
-        return this.word.indexOf(letter) === guess.indexOf(letter);
-    }
-
-    addGuess(guess: string): void {
-        if (this.currentTurn <= this.maxTurns) {
-            this.wordsGuessed.push(guess.toUpperCase());
-        }
-    }
-
-    processLastGuess(): void {
-        const guess = this.wordsGuessed[this.wordsGuessed.length - 1];
-
+        // if we got the right word, end the game
         if (this.isGuessCorrect(guess)) {
-            console.log("You win!");
+            console.log('win');
+
             return;
         }
 
-        guess.split('').forEach((letter, i) => this.processLetter(letter, guess, i));
-    }
+        if (this.isGameOver()) {
+            console.log('lose');
 
-    processLetter(letter: string, guess: string, index: number): void {
-        this.lettersUsed[letter] = this.lettersUsed[letter] || {};
-
-        if (!this.isLetterInWord(letter)) {
-            this.lettersUsed[letter].letterGuessState = LetterGuessState.NotInWord;
-        } else if (this.isLetterInCorrectPosition(guess, letter)) {
-            this.lettersUsed[letter].letterGuessState = LetterGuessState.InCorrectPosition;
-        } else {
-            this.lettersUsed[letter].letterGuessState = LetterGuessState.InWrongPosition;
+            return;
         }
+
+        // otherwise, start processing letter placements
+        guess.split('').forEach((letter, i) => {
+            let newLetterGuessState: LetterGuessState;
+            if (this.isLetterCorrect(guess, letter)) {
+                newLetterGuessState = LetterGuessState.Correct;
+            } else if (this.isLetterInWord(letter)) {
+                newLetterGuessState = LetterGuessState.InWrongPosition;
+            } else {
+                newLetterGuessState = LetterGuessState.NotInWord;
+            }
+
+            if (letter in this.letterGuesses) {
+                const currentLetterGuessState = this.letterGuesses[letter].letterGuessState;
+
+                // If the right position has already been guessed,
+                // that shouldn't be superseded by a bad guess
+                if (newLetterGuessState > currentLetterGuessState) {
+                    this.letterGuesses[letter].letterGuessState = newLetterGuessState;
+                }
+            } else {
+                this.letterGuesses[letter].letterGuessState = newLetterGuessState;
+            }
+        });
     }
-}
+
+    private initLetterPlacements() {
+        this._word.split('').forEach((letter, i) => {
+            if (letter in this.letterPlacements) {
+                this.letterPlacements[letter].push(i);
+            } else {
+                this.letterPlacements[letter] = [i];
+            }
+        });
+    }
+
+    private isGameOver(): boolean {
+        return this.currentTurn === this.numberTurns;
+    }
+
+    private isGuessCorrect(guess: string): boolean {
+        return guess === this._word;
+    }
+
+    private isLetterCorrect(guess: string, letter: string): boolean {
+        return this._word?.indexOf(letter) === guess.indexOf(letter);
+    }
+
+    private isLetterInWord(letter: string): boolean {
+        return this._word?.indexOf(letter) >= 0;
+    }
+};
 
 export default Game;
