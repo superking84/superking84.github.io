@@ -1,25 +1,26 @@
+import LetterGuessState from '../../types/LetterGuessState';
+import Guess from '../Guess/Guess';
 import './GuessList.css';
 
 interface GuessListProps {
+    wordsGuessed: string[];
+    currentTurn: number;
     guessInput: string[];
+    wordLength: number;
+    numberOfTurns: number;
 }
 
 function GuessList(props: GuessListProps) {
-    // 6 is a placeholder for now
-    const rows = [...Array(6)].map((_, rowIndex) => {
-        const isCurrentRow = rowIndex === 0;//props.currentTurn === (i + 1);
-        const rowClasses = `row${(isCurrentRow ? " current-row" : "")}`;
+    const rows = [...Array(props.numberOfTurns)].map((_, rowIndex) => {
+        const isCurrentRow = props.currentTurn === (rowIndex + 1);
+        const rowClasses = `guess-row${(isCurrentRow ? " current-guess-row" : "")}`;
 
-        return <div key={'guess-' + rowIndex} className={rowClasses}>
-            {/* placeholder of 5 for now */}
-            {[...Array(5)].map((_, colIndex) =>
-                <div key={'guess-' + rowIndex + '-letter-' + colIndex} className="letter-square">{isCurrentRow ? props.guessInput[colIndex] || " " : " "}</div>)
-            }
-        </div>;
+        const wordToDisplay = isCurrentRow ? props.guessInput : props.wordsGuessed[rowIndex]?.split('') || [];
+        return <Guess key={`guess-row-${rowIndex}`} rowClasses={rowClasses} rowIndex={rowIndex} wordLength={props.wordLength} wordToDisplay={wordToDisplay} />;
     });
 
     return (
-        <div>
+        <div className='container'>
             {rows}
         </div>
     );
