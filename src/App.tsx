@@ -17,6 +17,7 @@ class App extends React.Component {
     this.game.startNew();
 
     this.handleKeyboardEvent = this.handleKeyboardEvent.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   state: AppState;
@@ -32,14 +33,28 @@ class App extends React.Component {
       }
     }
 
-    // assumes valid (enough characters) guess for now
     if (ev.key === "Enter") {
-      const guess: string = this.state.guessInput.join('');
-      this.game.processGuess(guess);
+      if (this.game.isGuessValid(this.state.guessInput)) {
+        const guess: string = this.state.guessInput.join('');
+        this.game.processGuess(guess);
+        this.setState({
+          guessInput: []
+        });
+      }
     }
 
     if (ev.key === "Backspace") {
       const updatedGuessInput: string[] = this.state.guessInput.slice(0, this.state.guessInput.length - 1);
+      this.setState({
+        guessInput: updatedGuessInput
+      });
+    }
+  }
+
+  handleButtonClick(letter: string): void {
+    if (this.state.guessInput.length < this.game.word.length) {
+
+      const updatedGuessInput: string[] = this.state.guessInput.concat(letter.toUpperCase());
       this.setState({
         guessInput: updatedGuessInput
       });
@@ -56,7 +71,9 @@ class App extends React.Component {
 
   render(): React.ReactNode {
     return (
-      <GameContainer guessInput={this.state.guessInput} />
+      <GameContainer guessInput={this.state.guessInput} wordLength={this.game.word.length}
+        numberOfTurns={this.game.numberOfTurns} currentTurn={this.game.currentTurn} wordsGuessed={this.game.wordsGuessed}
+        addLetter={this.handleButtonClick} getLetterGuessState={this.game.getLetterGuessState} />
     );
   }
 }
