@@ -1,0 +1,11 @@
+.letter-square.not-in-word {
+    background-color: darkgray;
+    color: white;
+}
+.letter-square.in-wrong-position {
+    background-color: lightskyblue;
+}
+
+.letter-square.correct-position {
+    background-color: green;
+}

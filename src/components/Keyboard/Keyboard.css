@@ -1,16 +1,10 @@
-.container {
-    border: 2px dotted red;
-    max-width: 500px;
-    margin: auto;
-}
-
-.row {
+.keyboard-row {
     display: flex;
     height: 50px;
     justify-content: center;
     margin-bottom: 5px;
 }
 
-.row:first-child {
+.keyboard-row:first-child {
     margin-top: 5px;
 }

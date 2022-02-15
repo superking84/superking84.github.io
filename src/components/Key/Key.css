@@ -5,17 +5,25 @@
     max-width: 40px;
     flex: 1;
     margin-left: 5px;
+    cursor: pointer;
 }
 
-.key.unusedLetter {
-    background-color: black;
+.key:hover {
+    background-color: bisque;
+}
+.key:active {
+    background-color: beige;
+    color: brown;
+}
+
+.key.not-in-word {
+    background-color: darkslategray;
     color: white;
 }
-
-.key.incorrectPosition {
+.key.in-wrong-position {
     background-color: lightskyblue;
 }
 
-.key.correctPosition {
+.key.correct-position {
     background-color: green;
 }
