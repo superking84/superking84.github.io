@@ -1,8 +1,14 @@
+import LetterGuessState from '../../types/LetterGuessState';
 import Key from '../Key/Key';
 
 import './Keyboard.css';
 
-function Keyboard() {
+interface KeyboardProps {
+    addLetter: (letter: string) => void;
+    getLetterGuessState(letter: string): LetterGuessState | null;
+}
+
+function Keyboard(props: KeyboardProps) {
     const keys: string[][] = [
         'QWERTYUIOP'.split(''),
         'ASDFGHJKL'.split(''),
@@ -10,12 +16,12 @@ function Keyboard() {
     ];
 
     return (
-        <div className='container'>
-            {keys.map((row, rowIndex) =>
-                <div key={"row" + rowIndex} className='row'>{
-                    row.map(k => <Key label={k}></Key>)
-                }</div>
-            )}
+        <div>
+            {keys.map((row, rowIndex) => {
+                return <div key={`row-${rowIndex}`} className='keyboard-row'>{
+                    row.map(k => <Key letterGuessState={props.getLetterGuessState(k)} label={k} key={`key-${k}`} addLetter={props.addLetter}></Key>)
+                }</div>;
+            })}
         </div>
     );
 }
