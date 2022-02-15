@@ -8,8 +8,16 @@ class Game {
     private round: number; // number of times the game has been played
 
     // round-specific fields
-    private currentTurn: number;
-    private numberTurns: number;
+    private _currentTurn: number;
+    public get currentTurn(): number {
+        return this._currentTurn;
+    }
+
+    private _numberOfTurns: number;
+    public get numberOfTurns(): number {
+        return this._numberOfTurns;
+    }
+
 
     private _word!: string;
     public get word(): string {
@@ -18,47 +26,45 @@ class Game {
 
     private letterPlacements: LetterDictionary;
     private letterGuesses: LetterGuessDictionary;
-    private wordsGuessed: string[];
+    private _wordsGuessed: string[];
+    public get wordsGuessed(): string[] {
+        return this._wordsGuessed;
+    }
 
     constructor() {
         this.round = 1;
 
         this.letterPlacements = {};
-        this.currentTurn = 1;
-        this.numberTurns = Game.MAX_TURNS;
+        this._currentTurn = 1;
+        this._numberOfTurns = Game.MAX_TURNS;
         this.letterGuesses = {};
-        this.wordsGuessed = [];
+        this._wordsGuessed = [];
+
+        this.isGuessValid = this.isGuessValid.bind(this);
+        this.processGuess = this.processGuess.bind(this);
+        this.getLetterGuessState = this.getLetterGuessState.bind(this);
     }
 
     public startNew(): void {
         this.round += 1;
 
         this.letterPlacements = {};
-        this.currentTurn = 1;
-        this.numberTurns = Game.MAX_TURNS;
-        this.wordsGuessed = [];
+        this._currentTurn = 1;
+        this._numberOfTurns = Game.MAX_TURNS;
+        this._wordsGuessed = [];
         this.letterGuesses = {};
 
         this._word = "BINGO";
         this.initLetterPlacements();
     }
 
+    public isGuessValid(guessInput: string[]): boolean {
+        return guessInput.length === this.word.length;
+    }
+
     public processGuess(guess: string): void {
-        this.currentTurn += 1;
-        this.wordsGuessed.push(guess);
-
-        // if we got the right word, end the game
-        if (this.isGuessCorrect(guess)) {
-            console.log('win');
-
-            return;
-        }
-
-        if (this.isGameOver()) {
-            console.log('lose');
-
-            return;
-        }
+        this._currentTurn += 1;
+        this._wordsGuessed.push(guess);
 
         // otherwise, start processing letter placements
         guess.split('').forEach((letter, i) => {
@@ -80,9 +86,26 @@ class Game {
                     this.letterGuesses[letter].letterGuessState = newLetterGuessState;
                 }
             } else {
-                this.letterGuesses[letter].letterGuessState = newLetterGuessState;
+                this.letterGuesses[letter] = { letterGuessState: newLetterGuessState };
             }
         });
+
+        // if we got the right word, end the game
+        if (this.isGuessCorrect(guess)) {
+            console.log('win');
+
+            return;
+        }
+
+        if (this.isGameOver()) {
+            console.log('lose');
+
+            return;
+        }
+    }
+
+    public getLetterGuessState(letter: string): LetterGuessState | null {
+        return this.letterGuesses[letter]?.letterGuessState;
     }
 
     private initLetterPlacements() {
@@ -96,7 +119,7 @@ class Game {
     }
 
     private isGameOver(): boolean {
-        return this.currentTurn === this.numberTurns;
+        return this._currentTurn >= this._numberOfTurns;
     }
 
     private isGuessCorrect(guess: string): boolean {
