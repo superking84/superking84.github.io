@@ -23,7 +23,6 @@ function Key(props: KeyProps) {
             break;
     }
 
-    console.log(classes);
     return (
         <button type='button' className={classes}
             onMouseDown={(ev) => ev.preventDefault()}
