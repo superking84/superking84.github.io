@@ -8,6 +8,7 @@ interface GuessListProps {
     guessInput: string[];
     wordLength: number;
     numberOfTurns: number;
+    getLetterGuessStateForGuess(letter: string, index: number): LetterGuessState;
 }
 
 function GuessList(props: GuessListProps) {
@@ -16,7 +17,8 @@ function GuessList(props: GuessListProps) {
         const rowClasses = `guess-row${(isCurrentRow ? " current-guess-row" : "")}`;
 
         const wordToDisplay = isCurrentRow ? props.guessInput : props.wordsGuessed[rowIndex]?.split('') || [];
-        return <Guess key={`guess-row-${rowIndex}`} rowClasses={rowClasses} rowIndex={rowIndex} wordLength={props.wordLength} wordToDisplay={wordToDisplay} />;
+        return <Guess key={`guess-row-${rowIndex}`} rowClasses={rowClasses} rowIndex={rowIndex} currentTurn={props.currentTurn}
+            wordLength={props.wordLength} wordToDisplay={wordToDisplay} getLetterGuessStateForGuess={props.getLetterGuessStateForGuess} />;
     });
 
     return (

@@ -1,8 +1,222 @@
-import LetterDictionary from "./types/LetterDictionary";
+import LetterPlacementDictionary from "./types/LetterPlacementDictionary";
 import LetterGuessDictionary from "./types/LetterGuessDictionary";
 import LetterGuessState from "./types/LetterGuessState";
 
 class Game {
+    private static wordList: string[] = [
+        "ABUSE",
+        "ADULT",
+        "AGENT",
+        "ANGER",
+        "APPLE",
+        "AWARD",
+        "BASIS",
+        "BEACH",
+        "BIRTH",
+        "BLOCK",
+        "BLOOD",
+        "BOARD",
+        "BRAIN",
+        "BREAD",
+        "BREAK",
+        "BROWN",
+        "BUYER",
+        "CAUSE",
+        "CHAIN",
+        "CHAIR",
+        "CHEST",
+        "CHIEF",
+        "CHILD",
+        "CHINA",
+        "CLAIM",
+        "CLASS",
+        "CLOCK",
+        "COACH",
+        "COAST",
+        "COURT",
+        "COVER",
+        "CREAM",
+        "CRIME",
+        "CROSS",
+        "CROWD",
+        "CROWN",
+        "CYCLE",
+        "DANCE",
+        "DEATH",
+        "DEPTH",
+        "DOUBT",
+        "DRAFT",
+        "DRAMA",
+        "DREAM",
+        "DRESS",
+        "DRINK",
+        "DRIVE",
+        "EARTH",
+        "ENEMY",
+        "ENTRY",
+        "ERROR",
+        "EVENT",
+        "FAITH",
+        "FAULT",
+        "FIELD",
+        "FIGHT",
+        "FINAL",
+        "FLOOR",
+        "FOCUS",
+        "FORCE",
+        "FRAME",
+        "FRANK",
+        "FRONT",
+        "FRUIT",
+        "GLASS",
+        "GRANT",
+        "GRASS",
+        "GREEN",
+        "GROUP",
+        "GUIDE",
+        "HEART",
+        "HENRY",
+        "HORSE",
+        "HOTEL",
+        "HOUSE",
+        "IMAGE",
+        "INDEX",
+        "INPUT",
+        "ISSUE",
+        "JAPAN",
+        "JONES",
+        "JUDGE",
+        "KNIFE",
+        "LAURA",
+        "LAYER",
+        "LEVEL",
+        "LEWIS",
+        "LIGHT",
+        "LIMIT",
+        "LUNCH",
+        "MAJOR",
+        "MARCH",
+        "MATCH",
+        "METAL",
+        "MODEL",
+        "MONEY",
+        "MONTH",
+        "MOTOR",
+        "MOUTH",
+        "MUSIC",
+        "NIGHT",
+        "NOISE",
+        "NORTH",
+        "NOVEL",
+        "NURSE",
+        "OFFER",
+        "ORDER",
+        "OTHER",
+        "OWNER",
+        "PANEL",
+        "PAPER",
+        "PARTY",
+        "PEACE",
+        "PETER",
+        "PHASE",
+        "PHONE",
+        "PIECE",
+        "PILOT",
+        "PITCH",
+        "PLACE",
+        "PLANE",
+        "PLANT",
+        "PLATE",
+        "POINT",
+        "POUND",
+        "POWER",
+        "PRESS",
+        "PRICE",
+        "PRIDE",
+        "PRIZE",
+        "PROOF",
+        "QUEEN",
+        "RADIO",
+        "RANGE",
+        "RATIO",
+        "REPLY",
+        "RIGHT",
+        "RIVER",
+        "ROUND",
+        "ROUTE",
+        "RUGBY",
+        "SCALE",
+        "SCENE",
+        "SCOPE",
+        "SCORE",
+        "SENSE",
+        "SHAPE",
+        "SHARE",
+        "SHEEP",
+        "SHEET",
+        "SHIFT",
+        "SHIRT",
+        "SHOCK",
+        "SIGHT",
+        "SIMON",
+        "SKILL",
+        "SLEEP",
+        "SMILE",
+        "SMITH",
+        "SMOKE",
+        "SOUND",
+        "SOUTH",
+        "SPACE",
+        "SPEED",
+        "SPITE",
+        "SPORT",
+        "SQUAD",
+        "STAFF",
+        "STAGE",
+        "START",
+        "STATE",
+        "STEAM",
+        "STEEL",
+        "STOCK",
+        "STONE",
+        "STORE",
+        "STUDY",
+        "STUFF",
+        "STYLE",
+        "SUGAR",
+        "TABLE",
+        "TASTE",
+        "TERRY",
+        "THEME",
+        "THING",
+        "TITLE",
+        "TOTAL",
+        "TOUCH",
+        "TOWER",
+        "TRACK",
+        "TRADE",
+        "TRAIN",
+        "TREND",
+        "TRIAL",
+        "TRUST",
+        "TRUTH",
+        "UNCLE",
+        "UNION",
+        "UNITY",
+        "VALUE",
+        "VIDEO",
+        "VISIT",
+        "VOICE",
+        "WASTE",
+        "WATCH",
+        "WATER",
+        "WHILE",
+        "WHITE",
+        "WHOLE",
+        "WOMAN",
+        "WORLD",
+        "YOUTH"
+    ];
     private static MAX_TURNS: number = 6;
     // global (in the game sense) fields
     private round: number; // number of times the game has been played
@@ -24,7 +238,7 @@ class Game {
         return this._word;
     }
 
-    private letterPlacements: LetterDictionary;
+    private letterPlacements: LetterPlacementDictionary;
     private letterGuesses: LetterGuessDictionary;
     private _wordsGuessed: string[];
     public get wordsGuessed(): string[] {
@@ -42,7 +256,8 @@ class Game {
 
         this.isGuessValid = this.isGuessValid.bind(this);
         this.processGuess = this.processGuess.bind(this);
-        this.getLetterGuessState = this.getLetterGuessState.bind(this);
+        this.getLetterGuessStateForKey = this.getLetterGuessStateForKey.bind(this);
+        this.getLetterGuessStateForGuess = this.getLetterGuessStateForGuess.bind(this);
     }
 
     public startNew(): void {
@@ -54,16 +269,24 @@ class Game {
         this._wordsGuessed = [];
         this.letterGuesses = {};
 
-        this._word = "BINGO";
+
+        this._word = Game.getRandomWord();
         this.initLetterPlacements();
     }
 
+    private static getRandomWord(): string {
+        const index: number = Math.floor(Math.random() * Game.wordList.length);
+
+        return Game.wordList[index];
+    }
     public isGuessValid(guessInput: string[]): boolean {
-        return guessInput.length === this.word.length;
+        const guess: string = guessInput.join('');
+
+        return Game.wordList.includes(guess);
     }
 
     public processGuess(guess: string): void {
-        this._currentTurn += 1;
+        console.log(`Processing turn ${this.currentTurn}`);
         this._wordsGuessed.push(guess);
 
         // otherwise, start processing letter placements
@@ -90,6 +313,8 @@ class Game {
             }
         });
 
+        this._currentTurn += 1;
+
         // if we got the right word, end the game
         if (this.isGuessCorrect(guess)) {
             console.log('win');
@@ -98,13 +323,25 @@ class Game {
         }
 
         if (this.isGameOver()) {
-            console.log('lose');
+            console.log('You lose.  The word was ' + this._word);
 
             return;
         }
     }
 
-    public getLetterGuessState(letter: string): LetterGuessState | null {
+    public getLetterGuessStateForGuess(letter: string, index: number): LetterGuessState {
+        if (!(letter in this.letterPlacements)) {
+            return LetterGuessState.NotInWord;
+        }
+
+        if (!this.letterPlacements[letter].includes(index)) {
+            return LetterGuessState.InWrongPosition;
+        }
+
+        return LetterGuessState.Correct;
+    }
+
+    public getLetterGuessStateForKey(letter: string): LetterGuessState | null {
         return this.letterGuesses[letter]?.letterGuessState;
     }
 
@@ -118,8 +355,8 @@ class Game {
         });
     }
 
-    private isGameOver(): boolean {
-        return this._currentTurn >= this._numberOfTurns;
+    public isGameOver(): boolean {
+        return this._currentTurn > this._numberOfTurns;
     }
 
     private isGuessCorrect(guess: string): boolean {

@@ -5,7 +5,7 @@ import './Keyboard.css';
 
 interface KeyboardProps {
     addLetter: (letter: string) => void;
-    getLetterGuessState(letter: string): LetterGuessState | null;
+    getLetterGuessStateForKey(letter: string): LetterGuessState | null;
 }
 
 function Keyboard(props: KeyboardProps) {
@@ -19,7 +19,7 @@ function Keyboard(props: KeyboardProps) {
         <div>
             {keys.map((row, rowIndex) => {
                 return <div key={`row-${rowIndex}`} className='keyboard-row'>{
-                    row.map(k => <Key letterGuessState={props.getLetterGuessState(k)} label={k} key={`key-${k}`} addLetter={props.addLetter}></Key>)
+                    row.map(k => <Key letterGuessState={props.getLetterGuessStateForKey(k)} label={k} key={`key-${k}`} addLetter={props.addLetter}></Key>)
                 }</div>;
             })}
         </div>

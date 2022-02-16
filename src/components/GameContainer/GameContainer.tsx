@@ -10,15 +10,16 @@ interface GameContainerProps {
     wordLength: number;
     wordsGuessed: string[];
     addLetter: (letter: string) => void;
-    getLetterGuessState(letter: string): LetterGuessState | null;
+    getLetterGuessStateForKey(letter: string): LetterGuessState | null;
+    getLetterGuessStateForGuess(letter: string, index: number): LetterGuessState;
 }
 
 function GameContainer(props: GameContainerProps) {
     return (
         <div>
             <GuessList guessInput={props.guessInput} wordLength={props.wordLength} numberOfTurns={props.numberOfTurns}
-                currentTurn={props.currentTurn} wordsGuessed={props.wordsGuessed} />
-            <Keyboard addLetter={props.addLetter} getLetterGuessState={props.getLetterGuessState} />
+                currentTurn={props.currentTurn} wordsGuessed={props.wordsGuessed} getLetterGuessStateForGuess={props.getLetterGuessStateForGuess} />
+            <Keyboard addLetter={props.addLetter} getLetterGuessStateForKey={props.getLetterGuessStateForKey} />
         </div>
     );
 }
