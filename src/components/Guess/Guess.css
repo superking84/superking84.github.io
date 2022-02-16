@@ -5,3 +5,16 @@
 .letter-square.correct-position {
     background-color: green;
 }
+
+.letter-square {
+    width: 75px;
+    height: 75px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    line-height: 4rem;
+    vertical-align: middle;
+    box-sizing: border-box;
+    border: 2px solid white;
+}

@@ -1,6 +1,6 @@
 .keyboard-row {
     display: flex;
-    height: 50px;
+    height: 75px;
     justify-content: center;
     margin-bottom: 5px;
 }

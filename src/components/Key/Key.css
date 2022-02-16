@@ -1,11 +1,12 @@
 .key {
     border: 1px solid black;
     border-radius: 10%;
-    min-width: 20px;
-    max-width: 40px;
+    min-width: 50px;
+    max-width: 75px;
     flex: 1;
     margin-left: 5px;
     cursor: pointer;
+    font-size: xx-large;
 }
 
 .key:hover {
