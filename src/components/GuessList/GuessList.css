@@ -32,7 +32,3 @@
     grid-template-columns: repeat(5, 70px);
     grid-gap: 5px;
 }
- 
-.current-guess-row {
-    background: lightskyblue;
-}
