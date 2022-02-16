@@ -24,6 +24,10 @@ class App extends React.Component {
   game: Game;
 
   handleKeyboardEvent(ev: KeyboardEvent): void {
+    if (this.game.isGameOver()) {
+      return;
+    }
+
     if (this.state.guessInput.length < this.game.word.length) {
       if ('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.includes(ev.key.toUpperCase())) {
         const updatedGuessInput: string[] = this.state.guessInput.concat(ev.key.toUpperCase());
@@ -40,6 +44,8 @@ class App extends React.Component {
         this.setState({
           guessInput: []
         });
+      } else {
+        console.log("invalid input");
       }
     }
 
@@ -52,6 +58,10 @@ class App extends React.Component {
   }
 
   handleButtonClick(letter: string): void {
+    if (this.game.isGameOver()) {
+      return;
+    }
+
     if (this.state.guessInput.length < this.game.word.length) {
 
       const updatedGuessInput: string[] = this.state.guessInput.concat(letter.toUpperCase());
@@ -73,7 +83,8 @@ class App extends React.Component {
     return (
       <GameContainer guessInput={this.state.guessInput} wordLength={this.game.word.length}
         numberOfTurns={this.game.numberOfTurns} currentTurn={this.game.currentTurn} wordsGuessed={this.game.wordsGuessed}
-        addLetter={this.handleButtonClick} getLetterGuessState={this.game.getLetterGuessState} />
+        addLetter={this.handleButtonClick} getLetterGuessStateForKey={this.game.getLetterGuessStateForKey}
+        getLetterGuessStateForGuess={this.game.getLetterGuessStateForGuess} />
     );
   }
 }
