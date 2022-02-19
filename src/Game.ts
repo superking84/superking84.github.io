@@ -1,6 +1,7 @@
 import LetterPlacementDictionary from "./types/LetterPlacementDictionary";
 import LetterGuessDictionary from "./types/LetterGuessDictionary";
 import LetterGuessState from "./types/LetterGuessState";
+import GameState from "./types/GameState";
 
 class Game {
     private static wordList: string[] = [
@@ -217,11 +218,17 @@ class Game {
         "WORLD",
         "YOUTH"
     ];
+
     private static MAX_TURNS: number = 6;
     // global (in the game sense) fields
     private round: number; // number of times the game has been played
 
     // round-specific fields
+    private _gameState!: GameState;
+    public get gameState(): GameState {
+        return this._gameState;
+    }
+
     private _currentTurn: number;
     public get currentTurn(): number {
         return this._currentTurn;
@@ -263,6 +270,7 @@ class Game {
     public startNew(): void {
         this.round += 1;
 
+        this._gameState = GameState.InProgress;
         this.letterPlacements = {};
         this._currentTurn = 1;
         this._numberOfTurns = Game.MAX_TURNS;
@@ -319,12 +327,14 @@ class Game {
         if (this.isGuessCorrect(guess)) {
             console.log('win');
 
+            this._gameState = GameState.Won;
             return;
         }
 
         if (this.isGameOver()) {
             console.log('You lose.  The word was ' + this._word);
 
+            this._gameState = GameState.Lost;
             return;
         }
     }
@@ -341,8 +351,8 @@ class Game {
         return LetterGuessState.Correct;
     }
 
-    public getLetterGuessStateForKey(letter: string): LetterGuessState | null {
-        return this.letterGuesses[letter]?.letterGuessState;
+    public getLetterGuessStateForKey(key: string): LetterGuessState | null {
+        return this.letterGuesses[key]?.letterGuessState;
     }
 
     private initLetterPlacements() {
@@ -355,7 +365,7 @@ class Game {
         });
     }
 
-    public isGameOver(): boolean {
+    private isGameOver(): boolean {
         return this._currentTurn > this._numberOfTurns;
     }
 
