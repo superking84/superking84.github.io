@@ -3,7 +3,7 @@ import './Key.css';
 
 interface KeyProps {
     label: string;
-    addLetter: (letter: string) => void;
+    keyAction: (key: string) => void;
     letterGuessState: LetterGuessState | null;
 }
 
@@ -26,7 +26,7 @@ function Key(props: KeyProps) {
     return (
         <button type='button' className={classes}
             onMouseDown={(ev) => ev.preventDefault()}
-            onClick={() => { props.addLetter(props.label); }}>{props.label}</button>
+            onClick={() => { props.keyAction(props.label); }}>{props.label}</button>
     );
 }
 
