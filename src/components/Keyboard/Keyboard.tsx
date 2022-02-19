@@ -16,7 +16,7 @@ function Keyboard(props: KeyboardProps) {
     ];
 
     return (
-        <div>
+        <div className="keyboard">
             {keys.map((row, rowIndex) => {
                 return <div key={`row-${rowIndex}`} className='keyboard-row'>{
                     row.map(k => <Key letterGuessState={props.getLetterGuessStateForKey(k)} label={k} key={`key-${k}`} addLetter={props.addLetter}></Key>)

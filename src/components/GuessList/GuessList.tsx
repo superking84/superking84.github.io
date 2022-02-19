@@ -22,7 +22,7 @@ function GuessList(props: GuessListProps) {
     });
 
     return (
-        <div className='container'>
+        <div className="guess-list">
             {rows}
         </div>
     );

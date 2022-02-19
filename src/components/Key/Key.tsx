@@ -8,7 +8,7 @@ interface KeyProps {
 }
 
 function Key(props: KeyProps) {
-    let classes: string = "key";
+    let classes: string = "keyboard-key";
     switch (props.letterGuessState) {
         case LetterGuessState.Correct:
             classes += " correct-position";
@@ -26,7 +26,7 @@ function Key(props: KeyProps) {
     return (
         <button type='button' className={classes}
             onMouseDown={(ev) => ev.preventDefault()}
-            onClick={() => { props.addLetter(props.label); }} >{props.label}</button>
+            onClick={() => { props.addLetter(props.label); }}>{props.label}</button>
     );
 }
 
