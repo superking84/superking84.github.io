@@ -1,10 +1,11 @@
 .keyboard-key {
     border: 1px solid black;
     border-radius: 10%;
-    width: 50px;
+    min-width: 50px;
     margin-left: 5px;
     cursor: pointer;
     font-size: xx-large;
+    user-select: none;
 }
 
 .keyboard-key:first-child {
