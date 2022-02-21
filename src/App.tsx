@@ -37,6 +37,7 @@ class App extends React.Component {
     }
 
     if (this.state.message !== null) {
+      this.clearMessageTimeout();
       this.setState({
         message: null,
         messageTimeout: null
@@ -82,22 +83,33 @@ class App extends React.Component {
         default:
           break;
       }
+
+      this.clearMessageTimeout();
       const newState: AppState = {
         guessInput: [],
         message: message,
         messageTimeout: null
       };
       this.setState(newState);
+
     } else {
       const message: string = wordGuessState === WordGuessState.InvalidLength ?
         "Invalid word length" : "Not in word list";
       const that = this;
+      this.clearMessageTimeout();
       this.setState({
         message: message,
         messageTimeout: setTimeout(() => that.setState({ message: null, messageTimeout: null }), 2000)
       });
     }
   }
+
+  private clearMessageTimeout(): void {
+    if (this.state.messageTimeout !== null) {
+      clearTimeout(this.state.messageTimeout as NodeJS.Timeout);
+    }
+  }
+
   handleButtonClick(key: string): void {
     if (this.game.gameState !== GameState.InProgress) {
       return;
