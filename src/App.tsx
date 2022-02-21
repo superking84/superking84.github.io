@@ -45,7 +45,7 @@ class App extends React.Component {
     }
 
     if (this.state.guessInput.length < this.game.word.length) {
-      if ('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.includes(ev.key.toUpperCase())) {
+      if (Game.VALID_LETTERS.includes(ev.key.toUpperCase())) {
         const updatedGuessInput: string[] = this.state.guessInput.concat(ev.key.toUpperCase());
         this.setState({
           guessInput: updatedGuessInput
@@ -85,12 +85,11 @@ class App extends React.Component {
       }
 
       this.clearMessageTimeout();
-      const newState: AppState = {
+      this.setState({
         guessInput: [],
         message: message,
         messageTimeout: null
-      };
-      this.setState(newState);
+      });
 
     } else {
       const message: string = wordGuessState === WordGuessState.InvalidLength ?

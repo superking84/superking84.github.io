@@ -220,6 +220,8 @@ class Game {
         "YOUTH"
     ];
 
+    public static readonly VALID_LETTERS: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
     private static MAX_TURNS: number = 6;
     // global (in the game sense) fields
     private round: number; // number of times the game has been played
