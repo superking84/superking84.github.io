@@ -279,7 +279,6 @@ class Game {
         this._wordsGuessed = [];
         this.letterGuesses = {};
 
-
         this._word = Game.getRandomWord();
         this.initLetterPlacements();
     }

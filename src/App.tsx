@@ -33,35 +33,38 @@ class App extends React.Component {
 
   handleKeyboardEvent(ev: KeyboardEvent): void {
     if (this.game.gameState !== GameState.InProgress) {
-      return;
-    }
+      if (ev.key === "Enter") {
+        this.startNewGame();
+      }
+    } else {
 
-    if (this.state.message !== null) {
-      this.clearMessageTimeout();
-      this.setState({
-        message: null,
-        messageTimeout: null
-      });
-    }
+      if (this.state.message !== null) {
+        this.clearMessageTimeout();
+        this.setState({
+          message: null,
+          messageTimeout: null
+        });
+      }
 
-    if (this.state.guessInput.length < this.game.word.length) {
-      if (Game.VALID_LETTERS.includes(ev.key.toUpperCase())) {
-        const updatedGuessInput: string[] = this.state.guessInput.concat(ev.key.toUpperCase());
+      if (this.state.guessInput.length < this.game.word.length) {
+        if (Game.VALID_LETTERS.includes(ev.key.toUpperCase())) {
+          const updatedGuessInput: string[] = this.state.guessInput.concat(ev.key.toUpperCase());
+          this.setState({
+            guessInput: updatedGuessInput
+          });
+        }
+      }
+
+      if (ev.key === "Enter") {
+        this.processGameTurn();
+      }
+
+      if (ev.key === "Backspace") {
+        const updatedGuessInput: string[] = this.state.guessInput.slice(0, this.state.guessInput.length - 1);
         this.setState({
           guessInput: updatedGuessInput
         });
       }
-    }
-
-    if (ev.key === "Enter") {
-      this.processGameTurn();
-    }
-
-    if (ev.key === "Backspace") {
-      const updatedGuessInput: string[] = this.state.guessInput.slice(0, this.state.guessInput.length - 1);
-      this.setState({
-        guessInput: updatedGuessInput
-      });
     }
   }
 
@@ -75,10 +78,10 @@ class App extends React.Component {
       let message: string | null = null;
       switch (+this.game.gameState) {
         case GameState.Lost:
-          message = `You lost. The word was ${this.game.word}`;
+          message = `You lost. The word was ${this.game.word}. Press Enter to play again.`;
           break;
         case GameState.Won:
-          message = "You win!";
+          message = "You win! Press Enter to play again.";
           break;
         default:
           break;
@@ -111,22 +114,33 @@ class App extends React.Component {
 
   handleButtonClick(key: string): void {
     if (this.game.gameState !== GameState.InProgress) {
-      return;
+      if (key === "Enter") {
+        this.startNewGame();
+      }
+    } else {
+      if (key === 'Enter') {
+        this.processGameTurn();
+      } else if (key === "Back") {
+        const updatedGuessInput: string[] = this.state.guessInput.slice(0, this.state.guessInput.length - 1);
+        this.setState({
+          guessInput: updatedGuessInput
+        });
+      } else if (this.state.guessInput.length < this.game.word.length) {
+        const updatedGuessInput: string[] = this.state.guessInput.concat(key.toUpperCase());
+        this.setState({
+          guessInput: updatedGuessInput
+        });
+      }
     }
+  }
 
-    if (key === 'Enter') {
-      this.processGameTurn();
-    } else if (key === "Back") {
-      const updatedGuessInput: string[] = this.state.guessInput.slice(0, this.state.guessInput.length - 1);
-      this.setState({
-        guessInput: updatedGuessInput
-      });
-    } else if (this.state.guessInput.length < this.game.word.length) {
-      const updatedGuessInput: string[] = this.state.guessInput.concat(key.toUpperCase());
-      this.setState({
-        guessInput: updatedGuessInput
-      });
-    }
+  private startNewGame(): void {
+    this.game.startNew();
+    this.setState({
+      guessInput: [],
+      message: null,
+      messageTimeout: null
+    });
   }
 
   componentDidMount(): void {
