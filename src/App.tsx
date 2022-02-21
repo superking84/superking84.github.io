@@ -139,10 +139,8 @@ class App extends React.Component {
   }
 
   render(): React.ReactNode {
-    const gameContainer = <GameContainer guessInput={this.state.guessInput} wordLength={this.game.word.length}
-      numberOfTurns={this.game.numberOfTurns} currentTurn={this.game.currentTurn} wordsGuessed={this.game.wordsGuessed}
-      keyAction={this.handleButtonClick} getLetterGuessStateForKey={this.game.getLetterGuessStateForKey}
-      getLetterGuessStateForGuess={this.game.getLetterGuessStateForGuess} />;
+    const gameContainer = <GameContainer game={this.game} guessInput={this.state.guessInput}
+      keyAction={this.handleButtonClick} />;
 
     if (this.state.message === null) {
       return gameContainer;
