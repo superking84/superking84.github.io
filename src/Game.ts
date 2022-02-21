@@ -2,6 +2,7 @@ import LetterPlacementDictionary from "./types/LetterPlacementDictionary";
 import LetterGuessDictionary from "./types/LetterGuessDictionary";
 import LetterGuessState from "./types/LetterGuessState";
 import GameState from "./types/GameState";
+import WordGuessState from "./types/WordGuessState";
 
 class Game {
     private static wordList: string[] = [
@@ -261,7 +262,6 @@ class Game {
         this.letterGuesses = {};
         this._wordsGuessed = [];
 
-        this.isGuessValid = this.isGuessValid.bind(this);
         this.processGuess = this.processGuess.bind(this);
         this.getLetterGuessStateForKey = this.getLetterGuessStateForKey.bind(this);
         this.getLetterGuessStateForGuess = this.getLetterGuessStateForGuess.bind(this);
@@ -287,14 +287,21 @@ class Game {
 
         return Game.wordList[index];
     }
-    public isGuessValid(guessInput: string[]): boolean {
+    public getWordGuessState(guessInput: string[]): WordGuessState {
         const guess: string = guessInput.join('');
 
-        return Game.wordList.includes(guess);
+        if (guess.length < this.word.length) {
+            return WordGuessState.InvalidLength;
+        }
+
+        if (!Game.wordList.includes(guess)) {
+            return WordGuessState.NotInWordList;
+        }
+
+        return WordGuessState.Valid;
     }
 
     public processGuess(guess: string): void {
-        console.log(`Processing turn ${this.currentTurn}`);
         this._wordsGuessed.push(guess);
 
         // otherwise, start processing letter placements
@@ -325,15 +332,11 @@ class Game {
 
         // if we got the right word, end the game
         if (this.isGuessCorrect(guess)) {
-            console.log('win');
-
             this._gameState = GameState.Won;
             return;
         }
 
         if (this.isGameOver()) {
-            console.log('You lose.  The word was ' + this._word);
-
             this._gameState = GameState.Lost;
             return;
         }
