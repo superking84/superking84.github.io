@@ -6,19 +6,19 @@ interface GuessProps {
     rowIndex: number;
     wordLength: number;
     rowClasses: string;
-    wordToDisplay: string[];
-    getLetterGuessStateForGuess(letter: string, index: number): LetterGuessState;
+    lettersToDisplay: string[];
+    letterGuessStates: LetterGuessState[];
 }
 
 function Guess(props: GuessProps) {
     const letters = [...Array(props.wordLength)].map((_, colIndex) => {
-        const letter: string = props.wordToDisplay[colIndex];
+        const letter: string = props.lettersToDisplay[colIndex];
         let classes: string = "letter-square";
         if (letter && ((props.rowIndex + 1) < props.currentTurn)) {
-            const letterGuessState: LetterGuessState = props.getLetterGuessStateForGuess(letter, colIndex);
+            const letterGuessState: LetterGuessState = props.letterGuessStates[colIndex];
             switch (letterGuessState) {
                 case LetterGuessState.Correct:
-                    classes += " correct-position";
+                    classes += " correct";
                     break;
                 case LetterGuessState.InWrongPosition:
                     classes += " in-wrong-position";

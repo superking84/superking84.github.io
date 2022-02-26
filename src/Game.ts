@@ -266,7 +266,7 @@ class Game {
 
         this.processGuess = this.processGuess.bind(this);
         this.getLetterGuessStateForKey = this.getLetterGuessStateForKey.bind(this);
-        this.getLetterGuessStateForGuess = this.getLetterGuessStateForGuess.bind(this);
+        this.getLetterGuessStatesForGuess = this.getLetterGuessStatesForGuess.bind(this);
     }
 
     public startNew(): void {
@@ -305,7 +305,6 @@ class Game {
     public processGuess(guess: string): void {
         this._wordsGuessed.push(guess);
 
-        // otherwise, start processing letter placements
         guess.split('').forEach((letter, i) => {
             let newLetterGuessState: LetterGuessState;
             if (this.isLetterCorrect(guess, letter)) {
@@ -343,16 +342,41 @@ class Game {
         }
     }
 
-    public getLetterGuessStateForGuess(letter: string, index: number): LetterGuessState {
-        if (!(letter in this.letterPlacements)) {
-            return LetterGuessState.NotInWord;
-        }
+    public getLetterGuessStatesForGuess(guess: string): LetterGuessState[] {
+        let output: LetterGuessState[] = new Array(this.word.length).fill(LetterGuessState.NotInWord);
+        const guessedLetters = guess.split('');
 
-        if (!this.letterPlacements[letter].includes(index)) {
-            return LetterGuessState.InWrongPosition;
-        }
+        // I need a deep copy of the letter placements to avoid altering their values
+        let letterPlacements: LetterPlacementDictionary = JSON.parse(JSON.stringify(this.letterPlacements));
 
-        return LetterGuessState.Correct;
+        // first, fill in any correct guesses
+        guessedLetters.forEach((letter, i) => {
+            if (letter in letterPlacements && letterPlacements[letter].includes(i)) {
+                output[i] = LetterGuessState.Correct;
+
+                letterPlacements[letter] = letterPlacements[letter].filter(placementIndex => placementIndex !== i);
+                if (letterPlacements[letter].length === 0) {
+                    delete letterPlacements[letter];
+                }
+            }
+        });
+
+        // then look for any remaining letters in the wrong position
+        guessedLetters.forEach((letter, i) => {
+            if (letter in letterPlacements && output[i] !== LetterGuessState.Correct) {
+                output[i] = LetterGuessState.InWrongPosition;
+
+                // We know that all correct guesses have been exhausted at this point,
+                // so we really only care about the length of this array now, 
+                // thus the indiscriminate pop() here.
+                letterPlacements[letter].pop();
+                if (letterPlacements[letter].length === 0) {
+                    delete letterPlacements[letter];
+                }
+            }
+        });
+
+        return output;
     }
 
     public getLetterGuessStateForKey(key: string): LetterGuessState | null {
