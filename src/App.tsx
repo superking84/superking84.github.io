@@ -4,6 +4,7 @@ import MessageBox from './components/MessageBox/MessageBox';
 import Game from './game';
 import GameState from './types/GameState';
 import WordGuessState from './types/WordGuessState';
+import wordList from './resources/wordList';
 
 type AppState = {
   guessInput: string[];
@@ -20,7 +21,8 @@ class App extends React.Component {
       message: null,
       messageTimeout: null
     };
-    this.game = new Game();
+
+    this.game = new Game(this.initWordList(wordList));
     this.game.startNew();
 
     this.handleKeyboardEvent = this.handleKeyboardEvent.bind(this);
@@ -30,6 +32,12 @@ class App extends React.Component {
 
   state: AppState;
   game: Game;
+
+  private initWordList(wordList: string[]): string[] {
+    return wordList
+      .map(word => word.toUpperCase())
+      .filter((word, i, arr) => arr.indexOf(word) === i); // eliminate duplicates
+  }
 
   handleKeyboardEvent(ev: KeyboardEvent): void {
     if (this.game.gameState !== GameState.InProgress) {
