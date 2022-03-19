@@ -9,7 +9,7 @@ interface AppProps {
     game: Game;
 }
 
-function AppHooks(props: AppProps) {
+function App(props: AppProps) {
     const [guessInput, setGuessInput] = useState<string[]>([]);
     const [message, setMessage] = useState<string | null>(null);
     const [messageTimeout, setMessageTimeout] = useState<NodeJS.Timeout | null>(null);
@@ -135,4 +135,4 @@ function AppHooks(props: AppProps) {
     }
 }
 
-export default AppHooks;
+export default App;
