@@ -11,7 +11,7 @@ class Game {
 
     private static MAX_TURNS: number = 6;
     // global (in the game sense) fields
-    private round: number; // number of times the game has been played
+    private round: number = 0; // number of times the game has been played
 
     // round-specific fields
     private _gameState!: GameState;
@@ -19,12 +19,12 @@ class Game {
         return this._gameState;
     }
 
-    private _currentTurn: number;
+    private _currentTurn: number = 1;
     public get currentTurn(): number {
         return this._currentTurn;
     }
 
-    private _numberOfTurns: number;
+    private _numberOfTurns: number = Game.MAX_TURNS;
     public get numberOfTurns(): number {
         return this._numberOfTurns;
     }
@@ -35,27 +35,27 @@ class Game {
         return this._word;
     }
 
-    private letterPlacements: LetterPlacementDictionary;
-    private letterGuesses: LetterGuessDictionary;
-    private _wordsGuessed: string[];
+    private letterPlacements: LetterPlacementDictionary = {};
+    private letterGuesses: LetterGuessDictionary = {};
+    private _wordsGuessed: string[] = [];
     public get wordsGuessed(): string[] {
         return this._wordsGuessed;
     }
 
     constructor(wordList: string[]) {
-        Game.wordList = wordList;
+        Game.wordList = Game.initWordList(wordList);
 
-        this.round = 1;
-
-        this.letterPlacements = {};
-        this._currentTurn = 1;
-        this._numberOfTurns = Game.MAX_TURNS;
-        this.letterGuesses = {};
-        this._wordsGuessed = [];
+        this.startNew();
 
         this.processGuess = this.processGuess.bind(this);
         this.getLetterGuessStateForKey = this.getLetterGuessStateForKey.bind(this);
         this.getLetterGuessStatesForGuess = this.getLetterGuessStatesForGuess.bind(this);
+    }
+
+    private static initWordList(wordList: string[]): string[] {
+        return wordList
+            .map(word => word.toUpperCase())
+            .filter((word, i, arr) => arr.indexOf(word) === i); // eliminate duplicates
     }
 
     public startNew(): void {

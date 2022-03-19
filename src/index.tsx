@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Game from './game';
+import wordList from './resources/wordList';
+
+const game = new Game(wordList);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App game={game} />
   </React.StrictMode>,
   document.getElementById('root')
 );
