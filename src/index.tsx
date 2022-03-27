@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const game = new Game(wordList);
 const Home = () => <div><h2>Home</h2></div>;
-const About = () => <div><h2>About Us</h2></div>;
+const About = () => <div><h2>About Me</h2></div>;
 
 ReactDOM.render(
   <React.StrictMode>
