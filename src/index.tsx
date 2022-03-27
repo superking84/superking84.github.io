@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Game from './game';
 import wordList from './resources/wordList';
 import App from './App';
-import { BrowserRouter, Link, Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const game = new Game(wordList);
 const Home = () => <div><h2>Home</h2></div>;
@@ -15,26 +15,14 @@ const About = () => <div><h2>About Us</h2></div>;
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/wordle">Wordle</Link>
-          </li>
-        </ul>
-      </div>
-
-      <hr />
-
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/wordle" element={<Wordle game={game} />} />
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="wordle" element={<Wordle game={game} />} />
+        </Route>
       </Routes>
     </BrowserRouter>
-    {/* <App /> */}
-    {/* <Wordle game={game} /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

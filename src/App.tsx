@@ -1,9 +1,24 @@
-interface AppProps {
-}
+import { Link, Outlet } from "react-router-dom";
 
-function App(props: AppProps) {
+function App() {
     return <>
-        <h1>Hello, World</h1>
+        <div>
+            <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/about">About Us</Link>
+                </li>
+                <li>
+                    <Link to="/wordle">Wordle</Link>
+                </li>
+            </ul>
+        </div>
+
+        <hr />
+
+        <Outlet />
     </>;
 }
 
