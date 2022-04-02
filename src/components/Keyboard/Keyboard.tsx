@@ -1,8 +1,8 @@
+import "./Keyboard.scss";
+import Key from "../Key/Key";
 import KeyPlacement from "../../types/KeyPlacement";
 import LetterGuessState from "../../types/LetterGuessState";
-import Key from "../Key/Key";
 
-import "./Keyboard.scss";
 
 interface KeyboardProps {
     keyAction: (letter: string) => void;

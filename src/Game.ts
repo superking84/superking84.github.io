@@ -1,17 +1,17 @@
-import LetterPlacementDictionary from "./types/LetterPlacementDictionary";
+import GameState from "./types/GameState";
 import LetterGuessDictionary from "./types/LetterGuessDictionary";
 import LetterGuessState from "./types/LetterGuessState";
-import GameState from "./types/GameState";
+import LetterPlacementDictionary from "./types/LetterPlacementDictionary";
 import WordGuessState from "./types/WordGuessState";
 
 class Game {
     private static wordList: string[];
 
-    public static readonly VALID_LETTERS: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    public static readonly VALID_LETTERS: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    private static MAX_TURNS: number = 6;
+    private static MAX_TURNS = 6;
     // global (in the game sense) fields
-    private round: number = 0; // number of times the game has been played
+    private round = 0; // number of times the game has been played
 
     // round-specific fields
     private _gameState!: GameState;
@@ -19,7 +19,7 @@ class Game {
         return this._gameState;
     }
 
-    private _currentTurn: number = 1;
+    private _currentTurn = 1;
     public get currentTurn(): number {
         return this._currentTurn;
     }
@@ -78,7 +78,7 @@ class Game {
         return Game.wordList[index];
     }
     public getWordGuessState(guessInput: string[]): WordGuessState {
-        const guess: string = guessInput.join('');
+        const guess: string = guessInput.join("");
 
         if (guess.length < this.word.length) {
             return WordGuessState.InvalidLength;
@@ -94,7 +94,7 @@ class Game {
     public processGuess(guess: string): void {
         this._wordsGuessed.push(guess);
 
-        guess.split('').forEach((letter, i) => {
+        guess.split("").forEach((letter) => {
             let newLetterGuessState: LetterGuessState;
             if (this.isLetterCorrect(guess, letter)) {
                 newLetterGuessState = LetterGuessState.Correct;
@@ -132,11 +132,11 @@ class Game {
     }
 
     public getLetterGuessStatesForGuess(guess: string): LetterGuessState[] {
-        let output: LetterGuessState[] = new Array(this.word.length).fill(LetterGuessState.NotInWord);
-        const guessedLetters = guess.split('');
+        const output: LetterGuessState[] = new Array(this.word.length).fill(LetterGuessState.NotInWord);
+        const guessedLetters = guess.split("");
 
         // I need a deep copy of the letter placements to avoid altering their values
-        let letterPlacements: LetterPlacementDictionary = JSON.parse(JSON.stringify(this.letterPlacements));
+        const letterPlacements: LetterPlacementDictionary = JSON.parse(JSON.stringify(this.letterPlacements));
 
         // first, fill in any correct guesses
         guessedLetters.forEach((letter, i) => {
@@ -173,7 +173,7 @@ class Game {
     }
 
     private initLetterPlacements() {
-        this._word.split('').forEach((letter, i) => {
+        this._word.split("").forEach((letter, i) => {
             if (letter in this.letterPlacements) {
                 this.letterPlacements[letter].push(i);
             } else {
@@ -197,6 +197,6 @@ class Game {
     private isLetterInWord(letter: string): boolean {
         return this._word?.indexOf(letter) >= 0;
     }
-};
+}
 
 export default Game;

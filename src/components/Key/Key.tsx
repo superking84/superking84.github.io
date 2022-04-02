@@ -1,5 +1,5 @@
-import LetterGuessState from "../../types/LetterGuessState";
 import "./Key.scss";
+import LetterGuessState from "../../types/LetterGuessState";
 
 interface KeyProps {
     label: string;
@@ -26,7 +26,9 @@ function Key(props: KeyProps) {
     return (
         <button type='button' className={classes}
             onMouseDown={(ev) => ev.preventDefault()}
-            onClick={() => { props.keyAction(props.label); }}>{props.label}</button>
+            onClick={() => {
+                props.keyAction(props.label); 
+            }}>{props.label}</button>
     );
 }
 

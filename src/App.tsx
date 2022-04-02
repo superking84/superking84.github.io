@@ -1,5 +1,5 @@
+import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 function App() {
     return <>
