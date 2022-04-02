@@ -1,5 +1,5 @@
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function App() {
     return <>
@@ -9,10 +9,10 @@ function App() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/about">About Me</Nav.Link>
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/about">About Me</Nav.Link>
                         <NavDropdown title="Projects" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/projects/wordle">Wordle</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/projects/wordle">Wordle</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
