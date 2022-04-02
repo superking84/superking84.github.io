@@ -1,5 +1,5 @@
-import LetterGuessState from '../../types/LetterGuessState';
-import './Key.scss';
+import LetterGuessState from "../../types/LetterGuessState";
+import "./Key.scss";
 
 interface KeyProps {
     label: string;
@@ -8,7 +8,7 @@ interface KeyProps {
 }
 
 function Key(props: KeyProps) {
-    let classes: string = "keyboard-key";
+    let classes = "keyboard-key";
     switch (props.letterGuessState) {
         case LetterGuessState.Correct:
             classes += " correct-position";

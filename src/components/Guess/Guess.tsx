@@ -1,4 +1,4 @@
-import './Guess.scss';
+import "./Guess.scss";
 import LetterGuessState from "../../types/LetterGuessState";
 
 interface GuessProps {
@@ -13,7 +13,7 @@ interface GuessProps {
 function Guess(props: GuessProps) {
     const letters = [...Array(props.wordLength)].map((_, colIndex) => {
         const letter: string = props.lettersToDisplay[colIndex];
-        let classes: string = "letter-square";
+        let classes = "letter-square";
         if (letter && ((props.rowIndex + 1) < props.currentTurn)) {
             const letterGuessState: LetterGuessState = props.letterGuessStates[colIndex];
             switch (letterGuessState) {
@@ -28,10 +28,10 @@ function Guess(props: GuessProps) {
             }
         }
 
-        return <div key={'guess-' + props.rowIndex + '-letter-' + colIndex} className={classes}>{letter}</div>;
+        return <div key={"guess-" + props.rowIndex + "-letter-" + colIndex} className={classes}>{letter}</div>;
     });
 
-    return <div key={'guess-' + props.rowIndex} className={props.rowClasses}>
+    return <div key={"guess-" + props.rowIndex} className={props.rowClasses}>
         {letters}
     </div>;
 }

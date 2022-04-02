@@ -1,6 +1,6 @@
-import LetterGuessState from '../../types/LetterGuessState';
-import Guess from '../Guess/Guess';
-import './GuessList.scss';
+import "./GuessList.scss";
+import Guess from "../Guess/Guess";
+import LetterGuessState from "../../types/LetterGuessState";
 
 interface GuessListProps {
     wordsGuessed: string[];
@@ -16,8 +16,8 @@ function GuessList(props: GuessListProps) {
         const isCurrentRow = props.currentTurn === (rowIndex + 1);
         const rowClasses = `guess-row${(isCurrentRow ? " current-guess-row" : "")}`;
 
-        const lettersToDisplay = isCurrentRow ? props.guessInput : props.wordsGuessed[rowIndex]?.split('') || [];
-        const letterGuessStates = props.getLetterGuessStatesForGuess(lettersToDisplay.join(''));
+        const lettersToDisplay = isCurrentRow ? props.guessInput : props.wordsGuessed[rowIndex]?.split("") || [];
+        const letterGuessStates = props.getLetterGuessStatesForGuess(lettersToDisplay.join(""));
         return <Guess key={`guess-row-${rowIndex}`} rowClasses={rowClasses} rowIndex={rowIndex} currentTurn={props.currentTurn}
             wordLength={props.wordLength} lettersToDisplay={lettersToDisplay} letterGuessStates={letterGuessStates} />;
     });

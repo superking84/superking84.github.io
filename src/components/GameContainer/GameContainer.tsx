@@ -1,7 +1,8 @@
-import './GameContainer.scss';
+import "./GameContainer.scss";
+import Game from "../../game";
 import GuessList from "../../components/GuessList/GuessList";
 import Keyboard from "../../components/Keyboard/Keyboard";
-import Game from '../../game';
+
 
 interface GameContainerProps {
     game: Game;

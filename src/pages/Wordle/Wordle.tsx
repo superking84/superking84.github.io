@@ -1,9 +1,9 @@
-import './Wordle.scss';
+import "./Wordle.scss";
 import { useCallback, useEffect, useState } from "react";
-import GameContainer from "../../components/GameContainer/GameContainer";
-import MessageBox from "../../components/MessageBox/MessageBox";
 import Game from "../../game";
+import GameContainer from "../../components/GameContainer/GameContainer";
 import GameState from "../../types/GameState";
+import MessageBox from "../../components/MessageBox/MessageBox";
 import WordGuessState from "../../types/WordGuessState";
 
 interface AppProps {
@@ -27,7 +27,7 @@ function Wordle(props: AppProps) {
         const wordGuessState: WordGuessState = game.getWordGuessState(guessInput);
 
         if (wordGuessState === WordGuessState.Valid) {
-            const guess: string = guessInput.join('');
+            const guess: string = guessInput.join("");
             game.processGuess(guess);
 
             let message: string | null = null;
@@ -99,18 +99,12 @@ function Wordle(props: AppProps) {
     }, [clearMessageTimeout, game.gameState, game.word.length, guessInput, message, processGameTurn, startNewGame]);
 
     useEffect(() => {
-        window.addEventListener('keyup', handleKeyboardEvent);
+        window.addEventListener("keyup", handleKeyboardEvent);
 
         return () => {
-            window.removeEventListener('keyup', handleKeyboardEvent);
+            window.removeEventListener("keyup", handleKeyboardEvent);
         };
     }, [guessInput, handleKeyboardEvent]);
-
-
-    // function handleKeyboardEvent(ev: KeyboardEvent): void {
-
-    // }
-
 
     function handleButtonClick(key: string): void {
         if (game.gameState !== GameState.InProgress) {
@@ -118,7 +112,7 @@ function Wordle(props: AppProps) {
                 startNewGame();
             }
         } else {
-            if (key === 'Enter') {
+            if (key === "Enter") {
                 processGameTurn();
             } else if (key === "Back") {
                 const updatedGuessInput: string[] = guessInput.slice(0, guessInput.length - 1);
