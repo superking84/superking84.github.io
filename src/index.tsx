@@ -1,16 +1,16 @@
+import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import Wordle from './Wordle';
-import reportWebVitals from './reportWebVitals';
-import Game from './game';
-import wordList from './resources/wordList';
-import App from './App';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
+import wordList from './resources/wordList';
+import Game from './game';
+import App from './App';
+import Wordle from './pages/Wordle/Wordle';
+import Home from './pages/Home/Home';
+import About from './pages/About/About';
 
 const game = new Game(wordList);
-const Home = () => <div><h2>Home</h2></div>;
-const About = () => <div><h2>About Me</h2></div>;
 
 ReactDOM.render(
   <React.StrictMode>

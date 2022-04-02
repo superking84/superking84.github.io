@@ -5,8 +5,6 @@ function App() {
     return <>
         <NavBar />
 
-        {/* <hr /> */}
-
         <Outlet />
     </>;
 }

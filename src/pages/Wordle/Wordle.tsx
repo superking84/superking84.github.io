@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import GameContainer from "./components/GameContainer/GameContainer";
-import MessageBox from "./components/MessageBox/MessageBox";
-import Game from "./game";
-import GameState from "./types/GameState";
-import WordGuessState from "./types/WordGuessState";
+import GameContainer from "../../components/GameContainer/GameContainer";
+import MessageBox from "../../components/MessageBox/MessageBox";
+import Game from "../../game";
+import GameState from "../../types/GameState";
+import WordGuessState from "../../types/WordGuessState";
 
 interface AppProps {
     game: Game;
