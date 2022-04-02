@@ -1,4 +1,4 @@
-import './MessageBox.css';
+import './MessageBox.scss';
 
 interface MessageBoxProps {
     message: string;

@@ -2,7 +2,7 @@ import KeyPlacement from '../../types/KeyPlacement';
 import LetterGuessState from '../../types/LetterGuessState';
 import Key from '../Key/Key';
 
-import './Keyboard.css';
+import './Keyboard.scss';
 
 interface KeyboardProps {
     keyAction: (letter: string) => void;

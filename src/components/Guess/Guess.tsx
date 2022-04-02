@@ -1,4 +1,4 @@
-import './Guess.css';
+import './Guess.scss';
 import LetterGuessState from "../../types/LetterGuessState";
 
 interface GuessProps {

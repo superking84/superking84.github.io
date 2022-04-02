@@ -1,3 +1,4 @@
+import './Wordle.scss';
 import { useCallback, useEffect, useState } from "react";
 import GameContainer from "../../components/GameContainer/GameContainer";
 import MessageBox from "../../components/MessageBox/MessageBox";

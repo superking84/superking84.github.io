@@ -1,6 +1,6 @@
 import LetterGuessState from '../../types/LetterGuessState';
 import Guess from '../Guess/Guess';
-import './GuessList.css';
+import './GuessList.scss';
 
 interface GuessListProps {
     wordsGuessed: string[];

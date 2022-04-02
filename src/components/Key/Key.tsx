@@ -1,5 +1,5 @@
 import LetterGuessState from '../../types/LetterGuessState';
-import './Key.css';
+import './Key.scss';
 
 interface KeyProps {
     label: string;

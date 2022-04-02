@@ -1,4 +1,4 @@
-import './GameContainer.css';
+import './GameContainer.scss';
 import GuessList from "../../components/GuessList/GuessList";
 import Keyboard from "../../components/Keyboard/Keyboard";
 import Game from '../../game';
