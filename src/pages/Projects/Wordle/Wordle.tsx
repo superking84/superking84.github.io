@@ -1,10 +1,10 @@
 import "./Wordle.scss";
 import { useCallback, useEffect, useState } from "react";
-import Game from "../../game";
-import GameContainer from "../../components/GameContainer/GameContainer";
-import GameState from "../../types/GameState";
-import MessageBox from "../../components/MessageBox/MessageBox";
-import WordGuessState from "../../types/WordGuessState";
+import Game from "../../../game";
+import GameContainer from "../../../components/GameContainer/GameContainer";
+import GameState from "../../../types/GameState";
+import MessageBox from "../../../components/MessageBox/MessageBox";
+import WordGuessState from "../../../types/WordGuessState";
 
 interface AppProps {
     game: Game;

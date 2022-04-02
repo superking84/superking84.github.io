@@ -6,7 +6,7 @@ import Game from "./game";
 import Home from "./pages/Home/Home";
 import React from "react";
 import ReactDOM from "react-dom";
-import Wordle from "./pages/Wordle/Wordle";
+import Wordle from "./pages/Projects/Wordle/Wordle";
 import reportWebVitals from "./reportWebVitals";
 import wordList from "./resources/wordList";
 
@@ -19,7 +19,9 @@ ReactDOM.render(
                 <Route path="/" element={<App />}>
                     <Route index element={<Home />} />
                     <Route path="about" element={<About />} />
-                    <Route path="wordle" element={<Wordle game={game} />} />
+                    <Route path="projects">
+                        <Route path="wordle" element={<Wordle game={game} />} />
+                    </Route>
                 </Route>
             </Routes>
         </BrowserRouter>

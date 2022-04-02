@@ -12,7 +12,7 @@ function App() {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/about">About Me</Nav.Link>
                         <NavDropdown title="Projects" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/wordle">Wordle</NavDropdown.Item>
+                            <NavDropdown.Item href="/projects/wordle">Wordle</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
