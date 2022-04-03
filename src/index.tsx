@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "./pages/About/About";

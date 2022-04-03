@@ -1,3 +1,4 @@
+import "./pages/Shared.scss";
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 

@@ -126,14 +126,12 @@ function Wordle(props: AppProps) {
 
     const gameContainer = <GameContainer game={game} guessInput={guessInput}
         keyAction={handleButtonClick} />;
-    if (message === null) {
-        return gameContainer;
-    } else {
-        return <>
-            {gameContainer}
-            <MessageBox message={message}></MessageBox>
-        </>;
-    }
+    
+    return <div className="wordle-container">
+        <h2>Wordle</h2>
+        {gameContainer}
+        {message !== null ? <MessageBox message={message.toString()}></MessageBox> : null}
+    </div>;
 }
 
 export default Wordle;
