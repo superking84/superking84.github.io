@@ -1,21 +1,18 @@
 import "./Wordle.scss";
 import { useCallback, useEffect, useState } from "react";
-import Game from "../../../game";
 import GameContainer from "../../../components/GameContainer/GameContainer";
 import GameState from "../../../types/GameState";
 import MessageBox from "../../../components/MessageBox/MessageBox";
 import WordGuessState from "../../../types/WordGuessState";
+import WordleGame from "../../../wordle";
+import wordList from "../../../resources/wordList";
 
-interface AppProps {
-    game: Game;
-}
+const game = new WordleGame(wordList);
 
-function Wordle(props: AppProps) {
+function Wordle() {
     const [guessInput, setGuessInput] = useState<string[]>([]);
     const [message, setMessage] = useState<string | null>(null);
     const [messageTimeout, setMessageTimeout] = useState<NodeJS.Timeout | null>(null);
-
-    const game = props.game;
 
     const clearMessageTimeout = useCallback(function (): void {
         if (messageTimeout !== null) {
@@ -81,7 +78,7 @@ function Wordle(props: AppProps) {
             }
 
             if (guessInput.length < game.word.length) {
-                if (Game.VALID_LETTERS.includes(ev.key.toUpperCase())) {
+                if (WordleGame.VALID_LETTERS.includes(ev.key.toUpperCase())) {
                     const updatedGuessInput: string[] = guessInput.concat(ev.key.toUpperCase());
                     setGuessInput(updatedGuessInput);
                 }

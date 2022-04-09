@@ -3,15 +3,11 @@ import "./index.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "./pages/About/About";
 import App from "./App";
-import Game from "./game";
 import Home from "./pages/Home/Home";
 import React from "react";
 import ReactDOM from "react-dom";
 import Wordle from "./pages/Projects/Wordle/Wordle";
 import reportWebVitals from "./reportWebVitals";
-import wordList from "./resources/wordList";
-
-const game = new Game(wordList);
 
 ReactDOM.render(
     <React.StrictMode>
@@ -21,7 +17,7 @@ ReactDOM.render(
                     <Route index element={<Home />} />
                     <Route path="about" element={<About />} />
                     <Route path="projects">
-                        <Route path="wordle" element={<Wordle game={game} />} />
+                        <Route path="wordle" element={<Wordle />} />
                     </Route>
                 </Route>
             </Routes>
