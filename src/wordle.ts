@@ -4,7 +4,7 @@ import LetterGuessState from "./types/LetterGuessState";
 import LetterPlacementDictionary from "./types/LetterPlacementDictionary";
 import WordGuessState from "./types/WordGuessState";
 
-class Game {
+class WordleGame {
     private static wordList: string[];
 
     public static readonly VALID_LETTERS: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -24,7 +24,7 @@ class Game {
         return this._currentTurn;
     }
 
-    private _numberOfTurns: number = Game.MAX_TURNS;
+    private _numberOfTurns: number = WordleGame.MAX_TURNS;
     public get numberOfTurns(): number {
         return this._numberOfTurns;
     }
@@ -43,7 +43,7 @@ class Game {
     }
 
     constructor(wordList: string[]) {
-        Game.wordList = Game.initWordList(wordList);
+        WordleGame.wordList = WordleGame.initWordList(wordList);
 
         this.startNew();
 
@@ -64,18 +64,18 @@ class Game {
         this._gameState = GameState.InProgress;
         this.letterPlacements = {};
         this._currentTurn = 1;
-        this._numberOfTurns = Game.MAX_TURNS;
+        this._numberOfTurns = WordleGame.MAX_TURNS;
         this._wordsGuessed = [];
         this.letterGuesses = {};
 
-        this._word = Game.getRandomWord();
+        this._word = WordleGame.getRandomWord();
         this.initLetterPlacements();
     }
 
     private static getRandomWord(): string {
-        const index: number = Math.floor(Math.random() * Game.wordList.length);
+        const index: number = Math.floor(Math.random() * WordleGame.wordList.length);
 
-        return Game.wordList[index];
+        return WordleGame.wordList[index];
     }
     public getWordGuessState(guessInput: string[]): WordGuessState {
         const guess: string = guessInput.join("");
@@ -84,7 +84,7 @@ class Game {
             return WordGuessState.InvalidLength;
         }
 
-        if (!Game.wordList.includes(guess)) {
+        if (!WordleGame.wordList.includes(guess)) {
             return WordGuessState.NotInWordList;
         }
 
@@ -199,4 +199,4 @@ class Game {
     }
 }
 
-export default Game;
+export default WordleGame;
