@@ -1,5 +1,5 @@
 import "./GameContainer.scss";
-import Game from "../../game";
+import Game from "../../wordle";
 import GuessList from "../../components/GuessList/GuessList";
 import Keyboard from "../../components/Keyboard/Keyboard";
 
