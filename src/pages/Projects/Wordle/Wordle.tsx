@@ -1,10 +1,10 @@
 import "./Wordle.scss";
 import { useCallback, useEffect, useState } from "react";
-import GameContainer from "../../../components/GameContainer/GameContainer";
-import GameState from "../../../types/GameState";
+import GameContainer from "./components/GameContainer/GameContainer";
+import GameState from "./types/GameState";
 import MessageBox from "../../../components/MessageBox/MessageBox";
-import WordGuessState from "../../../types/WordGuessState";
-import WordleGame from "../../../wordle";
+import WordGuessState from "./types/WordGuessState";
+import WordleGame from "./game";
 import wordList from "../../../resources/wordList";
 
 const game = new WordleGame(wordList);

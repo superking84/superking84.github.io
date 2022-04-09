@@ -1,11 +1,11 @@
 import "./GameContainer.scss";
-import Game from "../../wordle";
 import GuessList from "../../components/GuessList/GuessList";
 import Keyboard from "../../components/Keyboard/Keyboard";
+import WordleGame from "../../game";
 
 
 interface GameContainerProps {
-    game: Game;
+    game: WordleGame;
     guessInput: string[];
     keyAction: (letter: string) => void;
 }
