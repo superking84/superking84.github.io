@@ -21,46 +21,43 @@ class Cell {
     }
 }
 
-class GameOfLife {
+class GameOfLifeGame {
     private wrapBoard = true;
 
     private rowCount: number;
     private columnCount: number;
-    private millisecondsPerTurn: number;
-    private turnInterval: NodeJS.Timer | null = null;
-    private isRunning(): boolean {
-        return this.turnInterval !== null;
+    private _millisecondsPerTurn: number;
+    public get millisecondsPerTurn(): number {
+        return this._millisecondsPerTurn;
     }
-
-    private turn: number;
-    private cells: Cell[][];
-
+    
+    private _turn: number;
+    public get turn(): number {
+        return this._turn;
+    }
+    
+    private _cells: Cell[][];
+    public get cells(): Cell[][] {
+        return this._cells;
+    }
+    
+    
     constructor(rowCount: number, columnCount: number, millisecondsPerTurn: number) {
-        
         this.rowCount = rowCount;    
         this.columnCount = columnCount;
-        this.millisecondsPerTurn = millisecondsPerTurn;
+        this._millisecondsPerTurn = millisecondsPerTurn;
 
-        this.turn = 1;
-        this.cells = this.initializeCells();
+        this._turn = 0;
+        this._cells = this.initializeCells();
+        console.log(this._cells);
     }
-
-    private startGame() {
-        this.turnInterval = setInterval(() => this.processTurn(), this.millisecondsPerTurn);
-    }
-    private stopGame() {
-        if (this.turnInterval !== null) {
-            clearInterval(this.turnInterval as NodeJS.Timer);
-            this.turnInterval = null;
-        }
-    }
-
-    private processTurn(): void {
+    
+    getNextCellState(): boolean[][] {
         // step 1: set future value
         this.cells.forEach(row => {
             row.forEach(cell => {
                 const livingNeighborCount: number = this.getLivingNeighborCount(cell);
-                cell.willBeAlive = livingNeighborCount === 2 || livingNeighborCount === 3;
+                cell.willBeAlive = (cell.isAlive && livingNeighborCount === 2) || livingNeighborCount === 3;
             });
         });
 
@@ -70,12 +67,12 @@ class GameOfLife {
                 cell.isAlive = cell.willBeAlive;
             });
         });
-        throw new Error("Method not implemented.");
+
+        return this.cells.map(row => row.map(cell => cell.isAlive));
     }
 
     private getLivingNeighborCount(cell: Cell): number {
         const neighbors: Cell[] = this.getCellNeighbors(cell);
-
         return neighbors.filter(n => n.isAlive).length;
     }
 
@@ -94,32 +91,54 @@ class GameOfLife {
         if (this.wrapBoard) {
             if (leftColumn < 0) {
                 leftColumn = this.columnCount - 1;
-                coordinates.push({ row: cell.row, column: leftColumn });
             }
+            
             if (rightColumn >= this.columnCount) {
                 rightColumn = 0;
-                coordinates.push({ row: cell.row, column: rightColumn });
             }
+            
             if (upperRow < 0) {
                 upperRow = this.rowCount - 1;
-                coordinates.push({ row: upperRow, column: cell.column });
             }
+            
             if (lowerRow >= this.rowCount) {
                 lowerRow = 0;
-                coordinates.push({ row: lowerRow, column: cell.column });
             }
+            
+            coordinates.push({ row: upperRow, column: leftColumn });
+            coordinates.push({ row: upperRow, column: cell.column });
+            coordinates.push({ row: upperRow, column: rightColumn });
+            coordinates.push({ row: cell.row, column: leftColumn });
+            coordinates.push({ row: cell.row, column: rightColumn });
+            coordinates.push({ row: lowerRow, column: leftColumn });
+            coordinates.push({ row: lowerRow, column: cell.column });
+            coordinates.push({ row: lowerRow, column: rightColumn });
         } else {
+            if (upperRow >= 0) {
+                coordinates.push({ row: upperRow, column: cell.column });
+                if (leftColumn >= 0) {
+                    coordinates.push({ row: upperRow, column: leftColumn });
+                }
+                if (rightColumn < this.columnCount) {
+                    coordinates.push({ row: upperRow, column: rightColumn });
+                }
+            }
+
             if (leftColumn >= 0) {
                 coordinates.push({ row: cell.row, column: leftColumn });
             }
             if (rightColumn < this.columnCount) {
                 coordinates.push({ row: cell.row, column: rightColumn });
             }
-            if (upperRow >= 0) {
-                coordinates.push({ row: upperRow, column: cell.column });
-            }
+            
             if (lowerRow < this.rowCount) {
                 coordinates.push({ row: lowerRow, column: cell.column });
+                if (leftColumn >= 0) {
+                    coordinates.push({ row: lowerRow, column: leftColumn });
+                }
+                if (rightColumn < this.columnCount) {
+                    coordinates.push({ row: lowerRow, column: rightColumn });
+                }
             }
         }
 
@@ -135,6 +154,9 @@ class GameOfLife {
 
             Array.from({ length: this.columnCount }, (_, columnIndex) => {
                 const cell = new Cell(rowIndex, columnIndex);
+                //DEBUG ONLY, delete
+                cell.isAlive = Math.random() <= 0.25;
+                // end debug
                 cell.neighborCoordinates = this.getCellNeighborCoordinates(cell);
                 row.push(cell);
             });
@@ -146,4 +168,4 @@ class GameOfLife {
     }
 }
 
-export default GameOfLife;
+export default GameOfLifeGame;
