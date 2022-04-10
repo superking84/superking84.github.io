@@ -9,3 +9,6 @@ Now, in 2022, I am a professional software developer, and I'm looking to update 
 ### Wordle Clone
 
 A pretty basic clone of the wildly popular game "Wordle". Currently only working on desktop (it *works* on mobile but the sizing is all off).   There are still some improvements to be made, including improvements to the word list, animations, and responsiveness on smaller devices.
+
+### Conway's Game of Life
+A favorite of mine that I enjoy implementing in whatever tech I happen to be learning at the moment. This one is still very much a work in progress, but I've already learned quite a bit about React trying to implement it, including the pitfalls of trying to use `setInterval` in React code.
