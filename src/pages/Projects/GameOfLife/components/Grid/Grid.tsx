@@ -2,15 +2,22 @@ import "./Grid.scss";
 import GridCell from "../GridCell/GridCell";
 
 interface GridProps {
-    values: boolean[][]
+    values: boolean[][];
+    toggleCell: (rowIndex: number, columnIndex: number) => void;
 }
 
-function Grid({ values: grid }: GridProps) {
+function Grid({ values, toggleCell }: GridProps) {
     return <div className="grid">
-        {grid.map((row, rowI) =>
-            <div className="row" key={`row-${rowI}`}>
-                {row.map((isAlive, colI) =>
-                    <GridCell key={`row-${rowI}-col-${colI}`} isAlive={isAlive} />
+        {values.map((row, rowIndex) =>
+            <div className="row" key={`row-${rowIndex}`}>
+                {row.map((isAlive, colIindex) =>
+                    <GridCell
+                        toggleCell={toggleCell}
+                        key={`row-${rowIndex}-col-${colIindex}`}
+                        isAlive={isAlive}
+                        rowIndex={rowIndex}
+                        columnIndex={colIindex}
+                    />
                 )}
             </div>
         )}

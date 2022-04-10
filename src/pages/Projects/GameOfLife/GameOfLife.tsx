@@ -12,13 +12,13 @@ function GameOfLife() {
     const runningRef = useRef(running);
     runningRef.current = running;
 
-    const [grid, setGrid] = useState<boolean[][]>(() => game.getCurrentCellState());
+    const [grid, setGrid] = useState<boolean[][]>(() => game.getCurrentGridState());
     
-    const processTurn = useCallback(function (): void {
-        if (runningRef.current) {
+    const processTurn = useCallback(function (forceTurn = false): void {
+        if (runningRef.current || forceTurn) {
             setTurn(turn + 1);
             game.incrementCellState();
-            setGrid(game.getCurrentCellState());
+            setGrid(game.getCurrentGridState());
         }
         
     }, [turn]);
@@ -51,7 +51,7 @@ function GameOfLife() {
     const clearGrid = useCallback(function (): void {
         stopGame();
         game.clearGrid();
-        setGrid(game.getCurrentCellState());
+        setGrid(game.getCurrentGridState());
         setTurn(0);
     }, [grid]);
 
@@ -63,6 +63,11 @@ function GameOfLife() {
         };
     }, [handleKeyboardEvent]);
 
+    const toggleCell = useCallback(function (rowIndex: number, columnIndex: number): void {
+        game.toggleCellState(rowIndex, columnIndex);
+        setGrid(game.getCurrentGridState());
+    }, [grid]);
+
     return <div className="gol-container">
         <h2>{`Turn ${turn}`}</h2>
         
@@ -70,8 +75,9 @@ function GameOfLife() {
             <button type="button" onClick={startGame}>Start</button>
             <button type="button" onClick={stopGame}>Stop</button>
             <button type="button" onClick={clearGrid}>Clear</button>
+            <button type="button" onClick={() => processTurn(true)}>+1 Turn</button>
         </div>
-        <Grid values={grid} />
+        <Grid toggleCell={toggleCell} values={grid} />
     </div>;
 }
 
