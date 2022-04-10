@@ -3,6 +3,7 @@ import "./index.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import About from "./pages/About/About";
 import App from "./App";
+import GameOfLife from "./pages/Projects/GameOfLife/GameOfLife";
 import Home from "./pages/Home/Home";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -18,6 +19,7 @@ ReactDOM.render(
                     <Route path="about" element={<About />} />
                     <Route path="projects">
                         <Route path="wordle" element={<Wordle />} />
+                        <Route path="gameoflife" element={<GameOfLife />} />
                     </Route>
                 </Route>
             </Routes>

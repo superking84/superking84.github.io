@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import "./pages/Shared.scss";
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
@@ -14,6 +15,7 @@ function App() {
                         <Nav.Link as={Link} to="/about">About Me</Nav.Link>
                         <NavDropdown title="Projects" id="basic-nav-dropdown">
                             <NavDropdown.Item as={Link} to="/projects/wordle">Wordle</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/projects/gameoflife">Conway's Game Of Life</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
