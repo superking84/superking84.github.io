@@ -1,7 +1,10 @@
-.cell {
-    width: 25px;
-    height: 25px;
-    border: 1px dotted gold;
-    display: inline-block;
-    text-align: center;
+body {
+    background-color: cornflowerblue;
+}
+
+.gol-container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 725px;
 }

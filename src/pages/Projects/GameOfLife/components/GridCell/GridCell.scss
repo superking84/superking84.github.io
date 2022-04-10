@@ -1,0 +1,13 @@
+.cell {
+    width: 25px;
+    height: 25px;
+    border: 1px dashed black;
+    display: inline-block;
+    text-align: center;
+    background-color: lightgray;
+    color: black;
+
+    &.alive {
+        background-color: gold;
+    }
+}
