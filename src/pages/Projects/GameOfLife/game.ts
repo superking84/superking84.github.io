@@ -23,7 +23,7 @@ class Cell {
 
 class GameOfLifeGame {
     private wrapBoard = true;
-
+    
     private rowCount: number;
     private columnCount: number;
     private _millisecondsPerTurn: number;
@@ -41,6 +41,11 @@ class GameOfLifeGame {
         return this._cells;
     }
     
+    clearGrid(): void {
+        this._cells.map(row => {
+            row.map(cell => cell.isAlive = false);
+        });
+    }
     
     constructor(rowCount: number, columnCount: number, millisecondsPerTurn: number) {
         this.rowCount = rowCount;    
@@ -49,10 +54,13 @@ class GameOfLifeGame {
 
         this._turn = 0;
         this._cells = this.initializeCells();
-        console.log(this._cells);
     }
     
-    getNextCellState(): boolean[][] {
+    getCurrentCellState(): boolean[][] {
+        return this.cells.map(row => row.map(cell => cell.isAlive));
+    }
+
+    incrementCellState(): void {
         // step 1: set future value
         this.cells.forEach(row => {
             row.forEach(cell => {
@@ -67,8 +75,6 @@ class GameOfLifeGame {
                 cell.isAlive = cell.willBeAlive;
             });
         });
-
-        return this.cells.map(row => row.map(cell => cell.isAlive));
     }
 
     private getLivingNeighborCount(cell: Cell): number {
