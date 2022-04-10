@@ -33,7 +33,7 @@ function Wordle() {
                     message = `You lost. The word was ${game.word}. Press Enter to play again.`;
                     break;
                 case GameState.Won:
-                    message = "You win! Press Enter to play again.";
+                    message = `${game.word} is a winner! Press Enter to play again.`;
                     break;
                 default:
                     break;
