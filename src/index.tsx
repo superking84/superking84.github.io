@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import About from "./pages/About/About";
 import App from "./App";
 import GameOfLife from "./pages/Projects/GameOfLife/GameOfLife";
@@ -12,9 +12,9 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
-                <Route path="/" element={<App />}>
+                <Route path="" element={<App />}>
                     <Route index element={<Home />} />
                     <Route path="about" element={<About />} />
                     <Route path="projects">
@@ -23,7 +23,7 @@ ReactDOM.render(
                     </Route>
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>,
     document.getElementById("root")
 );
