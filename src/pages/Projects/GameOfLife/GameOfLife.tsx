@@ -72,10 +72,10 @@ function GameOfLife() {
         <h2>{`Turn ${turn}`}</h2>
         
         <div>
-            <button type="button" onClick={startGame}>Start</button>
-            <button type="button" onClick={stopGame}>Stop</button>
+            <button type="button" disabled={running} onClick={startGame}>Start</button>
+            <button type="button" disabled={!running} onClick={stopGame}>Stop</button>
             <button type="button" onClick={clearGrid}>Clear</button>
-            <button type="button" onClick={() => processTurn(true)}>+1 Turn</button>
+            <button type="button" disabled={running} onClick={() => processTurn(true)}>+1 Turn</button>
         </div>
         <Grid toggleCell={toggleCell} values={grid} />
     </div>;
