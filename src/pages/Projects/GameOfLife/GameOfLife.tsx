@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import "./GameOfLife.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
 import GameOfLifeGame from "./game";
@@ -63,22 +64,59 @@ function GameOfLife() {
         };
     }, [handleKeyboardEvent]);
 
-    const toggleCell = useCallback(function (rowIndex: number, columnIndex: number): void {
-        game.toggleCellState(rowIndex, columnIndex);
+    const toggleCell = useCallback(function (rowIndex: number, columnIndex: number, makeAlive?: boolean): void {
+        game.toggleCellState(rowIndex, columnIndex, makeAlive);
         setGrid(game.getCurrentGridState());
     }, [grid]);
 
-    return <div className="gol-container">
-        <h2>{`Turn ${turn}`}</h2>
-        
-        <div>
-            <button type="button" disabled={running} onClick={startGame}>Start</button>
-            <button type="button" disabled={!running} onClick={stopGame}>Stop</button>
-            <button type="button" onClick={clearGrid}>Clear</button>
-            <button type="button" disabled={running} onClick={() => processTurn(true)}>+1 Turn</button>
+    return <div className="container gol-container">
+        <div className="row">
+            <div className="col-lg-4">
+                <div className="panel panel-default my-panel">
+                    <div className="panel-body">
+                        <h3>Conway's Game of Life</h3>
+                        <h4>How To Play</h4>
+                        <ol>
+                            <li>To activate a cell, simply click it, or or deactivate it, simply hold CTRL and click.</li>
+                            <li>
+                                You can also hold down your mouse button and drag to activate or deactivate multiple cells
+                                quickly.
+                            </li>
+                            <li>
+                                Press <StartButton disable={running} action={() => startGame()} /> to begin running the simulation,
+                                or press <ProcessTurnButton disable={running} action={() => processTurn(true)} /> to advance the 
+                                simulation by one turn.
+                            </li>
+                            <li>
+                                Pressing <StopButton disable={!running} action={() => stopGame()} /> will pause the game in its current
+                                state, while <ClearButton disable={false} action={() => clearGrid()} /> will stop the game and also
+                                clear the grid entirely.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div className="col-lg-8">
+                <div>
+                    <StartButton disable={running} action={() => startGame()} />
+                    <StopButton disable={!running} action={() => stopGame()} />
+                    <ClearButton disable={false} action={() => clearGrid()} />
+                    <ProcessTurnButton disable={running} action={() => processTurn(true)} />
+                </div>
+                <Grid toggleCell={toggleCell} values={grid} />
+            </div>
         </div>
-        <Grid toggleCell={toggleCell} values={grid} />
     </div>;
 }
+
+interface ActionButtonProps {
+    disable: boolean;
+    action: () => void;
+}
+const StartButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-success"} disabled={disable} onClick={action}>Start</button>;
+const StopButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-danger"} disabled={disable} onClick={action}>Stop</button>;
+const ClearButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-danger"} disabled={disable} onClick={action}>Clear</button>;
+const ProcessTurnButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-info"} disabled={disable} onClick={action}>+1 Turn</button>;
 
 export default GameOfLife;
