@@ -3,7 +3,7 @@ import GridCell from "../GridCell/GridCell";
 
 interface GridProps {
     values: boolean[][];
-    toggleCell: (rowIndex: number, columnIndex: number) => void;
+    toggleCell: (rowIndex: number, columnIndex: number, makeAlive?: boolean) => void;
 }
 
 function Grid({ values, toggleCell }: GridProps) {
