@@ -60,8 +60,12 @@ class GameOfLifeGame {
         return this.cells.map(row => row.map(cell => cell.isAlive));
     }
 
-    toggleCellState(rowIndex: number, columnIndex: number): void{
-        this._cells[rowIndex][columnIndex].isAlive = !this._cells[rowIndex][columnIndex].isAlive;
+    toggleCellState(rowIndex: number, columnIndex: number, makeAlive?: boolean): void {
+        if (makeAlive === undefined) {
+            this._cells[rowIndex][columnIndex].isAlive = !this._cells[rowIndex][columnIndex].isAlive;
+        } else {
+            this._cells[rowIndex][columnIndex].isAlive = makeAlive as boolean;        
+        }
     }
 
     incrementCellState(): void {
