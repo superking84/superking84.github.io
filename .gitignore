@@ -11,7 +11,7 @@
 
 # production
 /client/build
-/dist/server.js
+/dist
 
 # misc
 /client/.DS_Store
