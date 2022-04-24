@@ -1,0 +1,24 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superking84/superking84.github.io.git"
+  },
+  "author": "Frank Harvey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/superking84/superking84.github.io/issues"
+  },
+  "homepage": "https://github.com/superking84/superking84.github.io#readme",
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  }
+}
