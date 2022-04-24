@@ -20,6 +20,9 @@
         "react",
         "@typescript-eslint"
     ],
+    "ignorePatterns": [
+        "dist/*"
+    ],
     "rules": {
         "brace-style": [
             "error"
