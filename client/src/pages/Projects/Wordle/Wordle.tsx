@@ -55,14 +55,14 @@ function Wordle() {
                 setMessageTimeout(null);
             }, 2000));
         }
-    }, [clearMessageTimeout, game, guessInput]);
+    }, [clearMessageTimeout, guessInput]);
 
     const startNewGame = useCallback(function (): void {
         game.startNew();
         setGuessInput([]);
         setMessage(null);
         setMessageTimeout(null);
-    }, [game]);
+    }, []);
 
     const handleKeyboardEvent = useCallback(function (ev: KeyboardEvent): void {
         if (game.gameState !== GameState.InProgress) {
@@ -93,7 +93,7 @@ function Wordle() {
                 setGuessInput(updatedGuessInput);
             }
         }
-    }, [clearMessageTimeout, game.gameState, game.word.length, guessInput, message, processGameTurn, startNewGame]);
+    }, [clearMessageTimeout, guessInput, message, processGameTurn, startNewGame]);
 
     useEffect(() => {
         window.addEventListener("keyup", handleKeyboardEvent);

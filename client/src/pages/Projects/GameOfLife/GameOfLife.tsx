@@ -54,7 +54,7 @@ function GameOfLife() {
         game.clearGrid();
         setGrid(game.getCurrentGridState());
         setTurn(0);
-    }, [grid]);
+    }, [stopGame]);
 
     useEffect(() => {
         window.addEventListener("keyup", handleKeyboardEvent);
@@ -67,7 +67,7 @@ function GameOfLife() {
     const toggleCell = useCallback(function (rowIndex: number, columnIndex: number, makeAlive?: boolean): void {
         game.toggleCellState(rowIndex, columnIndex, makeAlive);
         setGrid(game.getCurrentGridState());
-    }, [grid]);
+    }, []);
 
     return <div className="container gol-container">
         <div className="row">

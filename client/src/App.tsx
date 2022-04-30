@@ -1,15 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import "./pages/Shared.scss";
-import axios from 'axios';
 import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { Link, Outlet } from "react-router-dom";
 
 function App() {
-    const x = axios({
-        method: 'GET',
-        url: '/api/wordle/secret-word'
-    }).then(res=>console.log(res));
-
     return <>
         <Navbar fixed="top" bg="light" expand="lg">
             <Container>

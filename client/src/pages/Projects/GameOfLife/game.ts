@@ -42,9 +42,9 @@ class GameOfLifeGame {
     }
     
     clearGrid(): void {
-        this._cells.map(row => {
-            row.map(cell => cell.isAlive = false);
-        });
+        this._cells.map(row =>
+            row.forEach(cell => cell.isAlive = false)
+        );
     }
     
     constructor(rowCount: number, columnCount: number, millisecondsPerTurn: number) {
@@ -173,9 +173,13 @@ class GameOfLifeGame {
                 // end debug
                 cell.neighborCoordinates = this.getCellNeighborCoordinates(cell);
                 row.push(cell);
+
+                return cell;
             });
 
             output.push(row);
+
+            return row;
         });
 
         return output;
