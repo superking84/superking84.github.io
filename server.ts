@@ -9,6 +9,10 @@ const port = process.env.PORT;
 
 app.use(express.static(path.join("client", "build")));
 
+app.get("/test", (req: Request, res: Response) => {
+    res.send("hello");
+});
+
 app.get("*", (req: Request, res: Response) => {
     res.sendFile(path.join("client", "build", "index.html"));
 });
