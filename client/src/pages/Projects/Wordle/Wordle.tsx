@@ -5,14 +5,15 @@ import GameState from "./types/GameState";
 import MessageBox from "../../../components/MessageBox/MessageBox";
 import WordGuessState from "./types/WordGuessState";
 import WordleGame from "./game";
-import wordList from "../../../resources/wordList";
+import { getWordList } from "./services/service";
 
-const game = new WordleGame(wordList);
+let game: WordleGame;
 
 function Wordle() {
     const [guessInput, setGuessInput] = useState<string[]>([]);
     const [message, setMessage] = useState<string | null>(null);
     const [messageTimeout, setMessageTimeout] = useState<NodeJS.Timeout | null>(null);
+    const [ready, setReady] = useState<boolean>(false);
 
     const clearMessageTimeout = useCallback(function (): void {
         if (messageTimeout !== null) {
@@ -103,6 +104,21 @@ function Wordle() {
         };
     }, [guessInput, handleKeyboardEvent]);
 
+    useEffect(() => {
+        let mounted = true;
+        getWordList()
+            .then(words => {
+                if (mounted) {
+                    game = new WordleGame(words);
+                    setReady(true);
+                }
+            });
+        
+        return () => {
+            mounted = false;
+        }
+    }, []);
+
     function handleButtonClick(key: string): void {
         if (game.gameState !== GameState.InProgress) {
             if (key === "Enter") {
@@ -124,11 +140,15 @@ function Wordle() {
     const gameContainer = <GameContainer game={game} guessInput={guessInput}
         keyAction={handleButtonClick} />;
     
-    return <div className="wordle-container">
-        <h2>Wordle</h2>
-        {gameContainer}
-        {message !== null ? <MessageBox message={message.toString()}></MessageBox> : null}
-    </div>;
+    if (ready) {
+        return <div className="wordle-container">
+            <h2>Wordle</h2>
+            {gameContainer}
+            {message !== null ? <MessageBox message={message.toString()}></MessageBox> : null}
+        </div>;
+    } else {
+        return <></>;
+    }
 }
 
 export default Wordle;
