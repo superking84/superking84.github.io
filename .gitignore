@@ -24,5 +24,4 @@
 /client/yarn-debug.log*
 /client/yarn-error.log*
 
-/client/devnotes.txt
-/client/sketch.txt
+config.env
