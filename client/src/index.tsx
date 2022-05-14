@@ -12,7 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
+        <BrowserRouter basename="portfolio">
             <Routes>
                 <Route path="" element={<App />}>
                     <Route index element={<Home />} />
