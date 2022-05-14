@@ -14,7 +14,7 @@ app.use(express.static(path.join("client", "build")));
 app.use("/api", apiRouter);
 
 app.get("*", (req: Request, res: Response) => {
-    res.sendFile(path.join("client", "build", "index.html"));
+    res.sendFile(path.join("client", "build", "index.html"), { root: __dirname });
 });
 
 app.listen(port, () => {
