@@ -11,8 +11,8 @@
     grid-template-columns: repeat(5, 75px);
     column-gap: 5px;
     height: 60px;
-}
 
-.guess-row:first-child {
-    margin-top: unset;
+    &:first-child {
+        margin-top: unset;
+    }
 }

@@ -2,32 +2,36 @@
     border: 1px solid black;
     border-radius: 10%;
     min-width: 50px;
+    // width: 50px;
+    // flex: 1;
     margin-left: 5px;
     cursor: pointer;
     font-size: xx-large;
     user-select: none;
-}
 
-.keyboard-key:first-child {
-    margin-left: unset;
-}
+    &:first-child {
+        margin-left: unset;
+    }
 
-.keyboard-key:hover {
-    background-color: bisque;
-}
-.keyboard-key:active {
-    background-color: beige;
-    color: brown;
-}
+    &:hover {
+        background-color: bisque;
+    }
 
-.keyboard-key.not-in-word {
-    background-color: darkslategray;
-    color: white;
-}
-.keyboard-key.in-wrong-position {
-    background-color: lightskyblue;
-}
+    &:active {
+        background-color: beige;
+        color: brown;
+    }
 
-.keyboard-key.correct-position {
-    background-color: green;
+    &.not-in-word {
+        background-color: darkslategray;
+        color: white;
+    }
+
+    &.in-wrong-position {
+        background-color: lightskyblue;
+    }
+
+    &.correct-position {
+        background-color: green;
+    }
 }

@@ -1,10 +1,16 @@
+.keyboard {
+    position: absolute;
+    bottom: 0;
+    // margin: 0 auto;
+}
+
 .keyboard-row {
     display: flex;
     height: 75px;
     justify-content: center;
     margin-bottom: 5px;
-}
 
-.keyboard-row:first-child {
-    margin-top: 5px;
+    &:first-child {
+        margin-top: 5px;
+    }
 }

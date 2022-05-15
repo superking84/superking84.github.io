@@ -1,11 +1,3 @@
-.letter-square.in-wrong-position {
-    background-color: lightskyblue;
-}
-
-.letter-square.correct {
-    background-color: green;
-}
-
 .letter-square {
     width: 90%;
     display: inline-flex;
@@ -15,5 +7,13 @@
     line-height: 3rem;
     vertical-align: middle;
     box-sizing: border-box;
-    border: 1px solid white;
+    border: 1px solid darkgrey;
+
+    &.correct {
+        background-color: green;
+    }
+
+    &.in-wrong-position {
+        background-color: lightskyblue;
+    }
 }
