@@ -3,10 +3,11 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
-    line-height: 3rem;
+    font-size: 4rem;
+    margin: 0 0.5rem;
+    // line-height: 3rem;
     vertical-align: middle;
-    box-sizing: border-box;
+    // box-sizing: border-box;
     border: 1px solid darkgrey;
 
     &.correct {

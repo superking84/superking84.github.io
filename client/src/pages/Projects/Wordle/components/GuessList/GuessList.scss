@@ -1,5 +1,5 @@
 .guess-list {
-    padding: 25px;
+    padding: 1em;
     display: flex;
     flex-direction: column;
 }
@@ -7,10 +7,10 @@
 .guess-row {
     margin: auto;
     margin-top: 5px;
-    display: grid;
-    grid-template-columns: repeat(5, 75px);
-    column-gap: 5px;
-    height: 60px;
+    display: flex;
+    flex-grow: 2;
+    width: 100%;
+    height: 10vh;
 
     &:first-child {
         margin-top: unset;
