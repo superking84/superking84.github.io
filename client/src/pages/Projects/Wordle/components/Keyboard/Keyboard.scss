@@ -1,12 +1,10 @@
 .keyboard {
-    position: absolute;
-    bottom: 0;
-    // margin: 0 auto;
+    width: 100%;
+    margin-top: auto;
 }
 
 .keyboard-row {
     display: flex;
-    height: 75px;
     justify-content: center;
     margin-bottom: 5px;
 

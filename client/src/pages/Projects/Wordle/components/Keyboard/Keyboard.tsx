@@ -3,7 +3,6 @@ import Key from "../Key/Key";
 import KeyPlacement from "../../types/KeyPlacement";
 import LetterGuessState from "../../types/LetterGuessState";
 
-
 interface KeyboardProps {
     keyAction: (letter: string) => void;
     getLetterGuessStateForKey(letter: string): LetterGuessState | null;

@@ -23,6 +23,10 @@ function Key(props: KeyProps) {
             break;
     }
 
+    if (props.label.length > 1) {
+        classes += " large-key";
+    }
+    
     return (
         <button type='button' className={classes}
             onMouseDown={(ev) => ev.preventDefault()}
