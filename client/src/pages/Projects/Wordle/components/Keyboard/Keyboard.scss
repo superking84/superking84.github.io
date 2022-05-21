@@ -1,6 +1,9 @@
 .keyboard {
-    width: 100%;
+    // width: 100%;
     // margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    // flex: auto;?
 }
 
 .keyboard-row {
