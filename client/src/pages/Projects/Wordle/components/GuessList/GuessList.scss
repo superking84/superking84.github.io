@@ -4,13 +4,16 @@
     flex-direction: column;
     row-gap: 0.5rem;
     height: 60%;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .guess-row {
     display: flex;
     column-gap: 0.5rem;
     width: 100%;
-    flex-grow: 1;
+    min-height: 15%;
+    // flex-grow: 1;
 
     &:first-child {
         margin-top: unset;

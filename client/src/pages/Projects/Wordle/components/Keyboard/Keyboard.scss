@@ -2,13 +2,15 @@
     display: flex;
     flex-direction: column;
     height: 40%;
-    // width: 100%;
+    row-gap: 0.25rem;
+    padding: 0 0.5rem 0.25rem 0.5rem;
 }
 
 .keyboard-row {
     display: flex;
     justify-content: center;
     flex-grow: 1;
+    column-gap: 0.25rem;
 
     &:first-child {
         margin-top: 0.25rem;

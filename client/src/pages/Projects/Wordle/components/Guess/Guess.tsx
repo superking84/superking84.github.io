@@ -13,7 +13,7 @@ interface GuessProps {
 function Guess(props: GuessProps) {
     const letters = [...Array(props.wordLength)].map((_, colIndex) => {
         const letter: string = props.lettersToDisplay[colIndex];
-        let classes = "letter-square";
+        let classes = "guess-square";
         if (letter && ((props.rowIndex + 1) < props.currentTurn)) {
             const letterGuessState: LetterGuessState = props.letterGuessStates[colIndex];
             switch (letterGuessState) {
