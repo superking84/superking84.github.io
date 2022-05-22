@@ -17,3 +17,9 @@
         width: 450px;
     }
 }
+
+@media (min-width: $screen-width-sm) {
+    .game-container {
+        width: 300px;
+    }
+}
