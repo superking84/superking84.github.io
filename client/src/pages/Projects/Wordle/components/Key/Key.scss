@@ -1,11 +1,9 @@
 .keyboard-key {
     border: 1px solid black;
     border-radius: 10%;
-    // width: 50px;
-    margin-left: 5px;
     cursor: pointer;
     flex-grow: 1;
-    font-size: xx-large;
+    font-size: 150%;
     user-select: none;
 
     &:first-child {

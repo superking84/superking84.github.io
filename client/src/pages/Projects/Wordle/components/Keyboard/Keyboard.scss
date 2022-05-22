@@ -1,6 +1,4 @@
 .keyboard {
-    // width: 100%;
-    // margin-top: auto;
     display: flex;
     flex-direction: column;
 }
@@ -8,7 +6,6 @@
 .keyboard-row {
     display: flex;
     justify-content: center;
-    margin-bottom: 5px;
 
     &:first-child {
         margin-top: 5px;
