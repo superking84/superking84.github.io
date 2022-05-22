@@ -9,4 +9,5 @@ body {
     flex-direction: column;
     border: 1px dotted blue;
     height: calc(100vh - var(--navbar-height));
+    width: 100%;
 }
