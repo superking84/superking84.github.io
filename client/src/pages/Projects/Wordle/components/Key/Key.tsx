@@ -28,11 +28,11 @@ function Key(props: KeyProps) {
     }
     
     return (
-        <button type='button' className={classes}
+        <div className={classes}
             onMouseDown={(ev) => ev.preventDefault()}
             onClick={() => {
                 props.keyAction(props.label); 
-            }}>{props.label}</button>
+            }}>{props.label}</div>
     );
 }
 
