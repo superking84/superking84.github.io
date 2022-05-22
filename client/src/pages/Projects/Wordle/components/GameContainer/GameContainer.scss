@@ -1,8 +1,6 @@
 .game-container {
     margin: 0 auto;
-    max-width: 500px;
-    // width: 100%;
-    height: calc(100vh - var(--navbar-height));
-    border: .5px dotted white;
-    overflow: hidden;
+    width: 100%;
+    max-width: 550px;
+    // height: calc(100vh - var(--navbar-height));
 }
