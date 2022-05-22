@@ -1,0 +1,32 @@
+.my-panel {
+    background-color: white;
+    color: initial;
+    margin: 0 auto 5vh auto;
+    padding: 0.2rem;
+    font-size: x-large;
+}
+
+.home-container {
+    max-width: 75%;
+    margin: 20vh auto 0 auto;
+
+    h2 {
+        margin-bottom: 5vh;
+    }
+
+    ul {
+        list-style: square;
+    }
+}
+
+@media (max-width: 700px) {
+    .home-container {
+        margin-top: 5vh;
+    }
+}
+
+@media (min-width: 1500px) {
+    .home-container {
+        max-width: 50%;
+    }
+}

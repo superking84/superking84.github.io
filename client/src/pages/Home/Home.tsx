@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Home.scss";
 
 /* eslint-disable react/no-unescaped-entities */
-const Home = () => <div className="page-container">
+const Home = () => <div className="home-container">
     <h2>Welcome!</h2>
     <div className="panel panel-default my-panel">
         <div className="panel-body">
