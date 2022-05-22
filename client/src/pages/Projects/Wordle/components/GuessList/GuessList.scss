@@ -3,13 +3,14 @@
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
+    height: 50vh;
 }
 
 .guess-row {
     display: flex;
     column-gap: 0.5rem;
     width: 100%;
-    height: 10vh;
+    flex-grow: 1;
 
     &:first-child {
         margin-top: unset;

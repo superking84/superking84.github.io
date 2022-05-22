@@ -1,11 +1,13 @@
 .keyboard {
     display: flex;
     flex-direction: column;
+    height: 40vh;
 }
 
 .keyboard-row {
     display: flex;
     justify-content: center;
+    flex-grow: 1;
 
     &:first-child {
         margin-top: 0.25rem;
