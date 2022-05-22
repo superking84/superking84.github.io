@@ -1,19 +1,18 @@
 .guess-list {
+    $row-count: 6;
     padding: 1em;
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5rem;
+    display: grid;
+    grid-template-rows: repeat($row-count, calc(100% / $row-count));
     height: 60%;
-    width: 80%;
+    // width: 80%;
     margin: 0 auto;
 }
 
 .guess-row {
-    display: flex;
-    column-gap: 0.5rem;
-    width: 100%;
-    min-height: 15%;
-    // flex-grow: 1;
+    display: grid;
+    $column-count: 5;
+    grid-template-columns: repeat($column-count, calc(100% / $column-count));
+    grid-row: auto;
 
     &:first-child {
         margin-top: unset;

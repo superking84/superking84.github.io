@@ -46,7 +46,7 @@ function Keyboard(props: KeyboardProps) {
         <div className="keyboard">
             {[...Array(numRows)].map((_, rowIndex) => {
                 const thisRow: KeyPlacement[] = keyPlacements.filter(kp => kp.row === rowIndex + 1);
-                return <div key={`row-${rowIndex}`} className='keyboard-row'>{
+                return <div key={`row-${rowIndex}`} className={`keyboard-row row-${rowIndex + 1}`}>{
                     thisRow.map(kp => {
                         const letterGuessState = props.getLetterGuessStateForKey(kp.key);
 
