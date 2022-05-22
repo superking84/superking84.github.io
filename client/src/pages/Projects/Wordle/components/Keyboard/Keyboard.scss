@@ -1,11 +1,12 @@
 .keyboard {
-    // display: flex;
+    display: block;
     // flex-direction: column;
     height: 40%;
     row-gap: 0.25rem;
     padding: 0 0.5rem 0.25rem 0.5rem;
-    width: 85%;
+    width: 100%;
     margin: 0 auto;
+    border: 1px dotted yellow;
 }
 
 .keyboard-row {
