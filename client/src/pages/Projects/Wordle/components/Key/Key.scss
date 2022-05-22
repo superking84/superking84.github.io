@@ -4,6 +4,7 @@
     cursor: pointer;
     user-select: none;
     width: 1.5rem;
+    min-width: 0;
 
     &:first-child {
         margin-left: unset;
