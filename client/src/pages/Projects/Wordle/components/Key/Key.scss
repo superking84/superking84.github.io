@@ -5,8 +5,10 @@
     color: black;
     cursor: pointer;
     user-select: none;
-    // width: 1.5rem;
-    // min-width: 0;
+    align-items: center;
+    line-height: 5rem;
+    text-align: center;
+    width: 100%;
 
     &:first-child {
         margin-left: unset;
@@ -35,6 +37,6 @@
     }
 
     &.large-key {
-        width: unset;
+        // width: unset;
     }
 }

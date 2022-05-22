@@ -2,8 +2,9 @@
 
 .game-container {
     margin: 0 auto;
-    border: 1px solid white;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 

@@ -142,7 +142,7 @@ function Wordle() {
     
     if (ready) {
         return <div className="wordle-container">
-            <h2>fml</h2>
+            <h2>Wordle</h2>
             {gameContainer}
             {message !== null ? <MessageBox message={message.toString()}></MessageBox> : null}
         </div>;

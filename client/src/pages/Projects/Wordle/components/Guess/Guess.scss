@@ -1,12 +1,9 @@
 .guess-square {
-    // width: 100%;
-    // display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    // font-size: 4rem;
     font-size: 2rem;
-    // height: 16.6%;
-    vertical-align: middle;
+    height: 3rem;
+    min-height: 50px;
+    width: 3rem;
+    text-align: center;
     border: 1px solid darkgrey;
 
     &.correct {
