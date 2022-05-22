@@ -5,7 +5,7 @@ import { Link, Outlet } from "react-router-dom";
 
 function App() {
     return <>
-        <Navbar fixed="top" bg="light" expand="lg">
+        <Navbar bg="light" expand="lg">
             <Container>
                 <Navbar.Brand href="/">Go Home</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

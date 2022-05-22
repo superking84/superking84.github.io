@@ -1,3 +1,10 @@
+@import '../../../variables.scss';
+
+// #root {
+//     display: flex;
+//     flex-direction: column;
+// }
+
 body {
     background-color: black;
 }
@@ -5,4 +12,5 @@ body {
 .wordle-container {
     display: flex;
     flex-direction: column;
+    height: calc(100vh - var(--navbar-height));
 }
