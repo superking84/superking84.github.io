@@ -2,14 +2,17 @@
     background-color: white;
     color: black;
     height: 150px;
-    width: 350px;
+    width: 80%;
+    max-width: 300px;
     font-size: xx-large;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
-    right: 38%;
-    top: 250px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 40%;
     z-index: 9999;
     border: 1px solid black;
 }

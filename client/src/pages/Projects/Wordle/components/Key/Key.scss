@@ -1,3 +1,5 @@
+@import '../../../../../variables.scss';
+
 .keyboard-key {
     border: 1px solid black;
     border-radius: 10%;
@@ -6,7 +8,6 @@
     cursor: pointer;
     user-select: none;
     align-items: center;
-    line-height: 5rem;
     text-align: center;
     width: 100%;
 
@@ -38,5 +39,23 @@
 
     &.large-key {
         // width: unset;
+    }
+}
+
+@media (max-width: $screen-width-md) {
+    .keyboard-key {
+        line-height: 3rem;
+    }
+}
+
+@media (min-width: $screen-width-md) and (max-width: $screen-width-lg) {
+    .keyboard-key {
+        line-height: 3rem;
+    }
+}
+
+@media (min-width: $screen-width-lg) {
+    .keyboard-key {
+        line-height: 4rem;
     }
 }

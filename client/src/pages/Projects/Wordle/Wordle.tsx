@@ -9,6 +9,8 @@ import { getWordList } from "./services/service";
 
 let game: WordleGame;
 
+const MESSAGE_BOX_TIMEOUT_MS = 2000;
+
 function Wordle() {
     const [guessInput, setGuessInput] = useState<string[]>([]);
     const [message, setMessage] = useState<string | null>(null);
@@ -54,7 +56,7 @@ function Wordle() {
             setMessageTimeout(setTimeout(() => {
                 setMessage(null);
                 setMessageTimeout(null);
-            }, 2000));
+            }, MESSAGE_BOX_TIMEOUT_MS));
         }
     }, [clearMessageTimeout, guessInput]);
 
