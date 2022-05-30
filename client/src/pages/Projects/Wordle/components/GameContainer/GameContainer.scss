@@ -4,11 +4,8 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    // height: 90vh;
 }
 
-
-// @media (min-width: $screen-width-sm) and (max-width: $screen-width-md) {
 @media (max-width: $screen-width-md) {
     .game-container {
         width: 300px;
