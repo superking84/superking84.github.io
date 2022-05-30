@@ -1,8 +1,6 @@
+@import '../../../../../variables.scss';
+
 .guess-square {
-    font-size: 2rem;
-    height: 3rem;
-    min-height: 50px;
-    width: 3rem;
     text-align: center;
     border: 1px solid darkgrey;
 
@@ -12,5 +10,38 @@
 
     &.in-wrong-position {
         background-color: lightskyblue;
+    }
+}
+
+@media (max-width: $screen-width-md) {
+    $dimension: 2rem;
+
+    .guess-square {
+        line-height: $dimension;
+        font-size: $dimension;
+        height: $dimension;
+        width: $dimension;
+    }
+}
+
+@media (min-width: $screen-width-md) and (max-width: $screen-width-lg) {
+    $dimension: 3rem;
+
+    .guess-square {
+        line-height: $dimension;
+        font-size: $dimension;
+        height: $dimension;
+        width: $dimension;
+    }
+}
+
+@media (min-width: $screen-width-lg) {
+    $dimension: 4rem;
+
+    .guess-square {
+        line-height: $dimension;
+        font-size: $dimension;
+        height: $dimension;
+        width: $dimension;
     }
 }
