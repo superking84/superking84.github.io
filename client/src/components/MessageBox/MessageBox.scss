@@ -1,10 +1,9 @@
+@import '../../variables.scss';
+
 .message-box {
-    background-color: white;
-    color: black;
-    height: 150px;
-    width: 80%;
+    background-color: #1777b3;
+    width: 50%;
     max-width: 300px;
-    font-size: xx-large;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +11,29 @@
     left: 0;
     right: 0;
     margin: 0 auto;
-    top: 40%;
+    top: 20%;
     z-index: 9999;
     border: 1px solid black;
+    border-radius: 3px;
+}
+
+@media (max-width: $screen-width-md) {
+    .message-box {
+        font-size: large;
+        height: 60px;
+    }
+}
+
+@media (min-width: $screen-width-md) and (max-width: $screen-width-lg) {
+    .message-box {
+        font-size: x-large;
+        height: 80px;
+    }
+}
+
+@media (min-width: $screen-width-lg) {
+    .message-box {
+        font-size: x-large;
+        height: 80px;
+    }
 }
