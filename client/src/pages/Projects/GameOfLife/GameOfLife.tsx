@@ -83,13 +83,13 @@ function GameOfLife() {
                                 quickly.
                             </li>
                             <li>
-                                Press <StartButton disable={running} action={() => startGame()} /> to begin running the simulation,
+                                Press <StartButton disable={running} action={startGame} /> to begin running the simulation,
                                 or press <ProcessTurnButton disable={running} action={() => processTurn(true)} /> to advance the 
                                 simulation by one turn.
                             </li>
                             <li>
-                                Pressing <StopButton disable={!running} action={() => stopGame()} /> will pause the game in its current
-                                state, while <ClearButton disable={false} action={() => clearGrid()} /> will stop the game and also
+                                Pressing <StopButton disable={!running} action={stopGame} /> will pause the game in its current
+                                state, while <ClearButton disable={false} action={clearGrid} /> will stop the game and also
                                 clear the grid entirely.
                             </li>
                         </ol>
@@ -99,9 +99,9 @@ function GameOfLife() {
             
             <div className="col-lg-8">
                 <div>
-                    <StartButton disable={running} action={() => startGame()} />
-                    <StopButton disable={!running} action={() => stopGame()} />
-                    <ClearButton disable={false} action={() => clearGrid()} />
+                    <StartButton disable={running} action={startGame} />
+                    <StopButton disable={!running} action={stopGame} />
+                    <ClearButton disable={false} action={clearGrid} />
                     <ProcessTurnButton disable={running} action={() => processTurn(true)} />
                 </div>
                 <Grid toggleCell={toggleCell} values={grid} />
@@ -116,7 +116,7 @@ interface ActionButtonProps {
 }
 const StartButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-success"} disabled={disable} onClick={action}>Start</button>;
 const StopButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-danger"} disabled={disable} onClick={action}>Stop</button>;
-const ClearButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-danger"} disabled={disable} onClick={action}>Clear</button>;
-const ProcessTurnButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-info"} disabled={disable} onClick={action}>+1 Turn</button>;
+const ClearButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-info"} disabled={disable} onClick={action}>Clear</button>;
+const ProcessTurnButton = ({ disable, action }: ActionButtonProps) => <button type="button" className={disable ? "" : "btn-primary"} disabled={disable} onClick={action}>+1 Turn</button>;
 
 export default GameOfLife;
