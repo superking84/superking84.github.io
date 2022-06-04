@@ -5,6 +5,7 @@
     width: 50%;
     max-width: 300px;
     display: flex;
+    text-align: center;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -15,25 +16,27 @@
     z-index: 9999;
     border: 1px solid black;
     border-radius: 3px;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 @media (max-width: $screen-width-md) {
     .message-box {
         font-size: large;
-        height: 60px;
+        min-height: 60px;
     }
 }
 
 @media (min-width: $screen-width-md) and (max-width: $screen-width-lg) {
     .message-box {
         font-size: x-large;
-        height: 80px;
+        min-height: 80px;
     }
 }
 
 @media (min-width: $screen-width-lg) {
     .message-box {
         font-size: x-large;
-        height: 80px;
+        min-height: 80px;
     }
 }
