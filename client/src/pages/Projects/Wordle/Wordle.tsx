@@ -2,7 +2,7 @@ import "./Wordle.scss";
 import { useCallback, useEffect, useState } from "react";
 import GameContainer from "./components/GameContainer/GameContainer";
 import GameState from "./types/GameState";
-import MessageBox from "../../../components/MessageBox/MessageBox";
+import MessageBox, { MessageType } from "../../../components/MessageBox/MessageBox";
 import WordGuessState from "./types/WordGuessState";
 import WordleGame from "./game";
 import { getWordList } from "./services/service";
@@ -14,6 +14,7 @@ const MESSAGE_BOX_TIMEOUT_MS = 2000;
 function Wordle() {
     const [guessInput, setGuessInput] = useState<string[]>([]);
     const [message, setMessage] = useState<string | null>(null);
+    const [messageType, setMessageType] = useState<MessageType | null>(null);
     const [messageTimeout, setMessageTimeout] = useState<NodeJS.Timeout | null>(null);
     const [ready, setReady] = useState<boolean>(false);
 
@@ -31,12 +32,15 @@ function Wordle() {
             game.processGuess(guess);
 
             let message: string | null = null;
+            let messageType: MessageType | null = null;
             switch (+game.gameState) {
                 case GameState.Lost:
                     message = `You lost. The word was ${game.word}. Press Enter to play again.`;
+                    messageType = MessageType.Loss;
                     break;
                 case GameState.Won:
                     message = `${game.word} is a winner! Press Enter to play again.`;
+                    messageType = MessageType.Win;
                     break;
                 default:
                     break;
@@ -45,6 +49,7 @@ function Wordle() {
             clearMessageTimeout();
             setGuessInput([]);
             setMessage(message);
+            setMessageType(messageType);
             setMessageTimeout(null);
 
         } else {
@@ -53,6 +58,7 @@ function Wordle() {
 
             clearMessageTimeout();
             setMessage(message);
+            setMessageType(MessageType.Error);
             setMessageTimeout(setTimeout(() => {
                 setMessage(null);
                 setMessageTimeout(null);
@@ -64,6 +70,7 @@ function Wordle() {
         game.startNew();
         setGuessInput([]);
         setMessage(null);
+        setMessageType(null);
         setMessageTimeout(null);
     }, []);
 
@@ -73,10 +80,10 @@ function Wordle() {
                 startNewGame();
             }
         } else {
-
             if (message !== null) {
                 clearMessageTimeout();
                 setMessage(null);
+                setMessageType(null);
                 setMessageTimeout(null);
             }
 
@@ -146,7 +153,7 @@ function Wordle() {
         return <div className="wordle-container">
             <h2>Wordle</h2>
             {gameContainer}
-            {message !== null ? <MessageBox message={message.toString()}></MessageBox> : null}
+            {message !== null ? <MessageBox message={message.toString()} messageType={messageType}></MessageBox> : null}
         </div>;
     } else {
         return <></>;

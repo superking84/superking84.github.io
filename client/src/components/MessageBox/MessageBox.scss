@@ -18,6 +18,65 @@
     border-radius: 3px;
     padding-left: 1%;
     padding-right: 1%;
+
+    &.shake {
+        animation-duration: 0.125s;
+        animation-name: shake;
+        animation-iteration-count: 2;
+    }
+
+    &.hop {
+        animation-duration: 0.5s;
+        animation-name: hop;
+        animation-iteration-count: 3;
+    }
+
+    &.drop {
+        animation-duration: 1s;
+        animation-name: drop;
+    }
+}
+
+@keyframes hop {
+    from {
+        transform: none;
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+@keyframes shake {
+    from {
+        transform: none;
+    }
+
+    25% {
+        transform: rotate(0.01turn);
+    }
+
+    50% {
+        transform: rotate(-0.01turn);
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+@keyframes drop {
+    from {
+        transform: translateY(-10px);
+    }
+
+    to {
+        transform: none;
+    }
 }
 
 @media (max-width: $screen-width-md) {
