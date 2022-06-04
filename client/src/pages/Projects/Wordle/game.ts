@@ -88,6 +88,10 @@ class WordleGame {
             return WordGuessState.NotInWordList;
         }
 
+        if (this._wordsGuessed.includes(guess)) {
+            return WordGuessState.AlreadyUsed;
+        }
+        
         return WordGuessState.Valid;
     }
 

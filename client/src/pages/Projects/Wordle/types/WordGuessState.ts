@@ -1,7 +1,8 @@
 enum WordGuessState {
     Valid,
     NotInWordList,
-    InvalidLength
+    InvalidLength,
+    AlreadyUsed
 }
 
 export default WordGuessState;

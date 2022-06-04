@@ -31,15 +31,15 @@ function Wordle() {
             const guess: string = guessInput.join("");
             game.processGuess(guess);
 
-            let message: string | null = null;
+            let messageText: string | null = null;
             let messageType: MessageType | null = null;
             switch (+game.gameState) {
                 case GameState.Lost:
-                    message = `You lost. The word was ${game.word}. Press Enter to play again.`;
+                    messageText = `You lost. The word was ${game.word}. Press Enter to play again.`;
                     messageType = MessageType.Loss;
                     break;
                 case GameState.Won:
-                    message = `${game.word} is a winner! Press Enter to play again.`;
+                    messageText = `${game.word} is a winner! Press Enter to play again.`;
                     messageType = MessageType.Win;
                     break;
                 default:
@@ -48,16 +48,27 @@ function Wordle() {
 
             clearMessageTimeout();
             setGuessInput([]);
-            setMessage(message);
+            setMessage(messageText);
             setMessageType(messageType);
             setMessageTimeout(null);
 
         } else {
-            const message: string = wordGuessState === WordGuessState.InvalidLength ?
-                "Invalid word length" : "Not in word list";
-
+            let messageText: string;
+            switch (wordGuessState) {
+                case WordGuessState.InvalidLength:
+                    messageText = "Invalid word length";
+                    break;
+                case WordGuessState.AlreadyUsed:
+                    messageText = "You've already used this word. Select another";
+                    break;
+                case WordGuessState.NotInWordList:
+                    messageText = "Not in word list";
+                    break;
+                default: return;
+            }
+            
             clearMessageTimeout();
-            setMessage(message);
+            setMessage(messageText);
             setMessageType(MessageType.Error);
             setMessageTimeout(setTimeout(() => {
                 setMessage(null);
