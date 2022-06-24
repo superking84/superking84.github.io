@@ -9,3 +9,7 @@ Now, in 2022, I am a professional software developer, and I'm looking to update 
 ### Wordle Clone
 
 A pretty basic clone of the wildly popular game "Wordle". There are still some improvements that could be made, but I've gotten a pretty good working version up that is responsive on a decent variety of mobile devices. 
+
+### Conway's Game of Life
+
+The famous "zero-player" cellular automata game, which is one of my favorite projects to write on whatever front-end tech I'm learning at any given moment.  It's a bit wonky looking on mobile, and it's best viewed on desktop for now.
