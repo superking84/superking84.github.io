@@ -8,4 +8,4 @@ Now, in 2022, I am a professional software developer, and I'm looking to update 
 
 ### Wordle Clone
 
-A pretty basic clone of the wildly popular game "Wordle". Currently only working on desktop (it *works* on mobile but the sizing is all off).   There are still some improvements to be made, including improvements to the word list, animations, and responsiveness on smaller devices.
+A pretty basic clone of the wildly popular game "Wordle". There are still some improvements that could be made, but I've gotten a pretty good working version up that is responsive on a decent variety of mobile devices. 
